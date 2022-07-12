@@ -18,10 +18,11 @@
 }
 
 .submit button {
-  background-color: #1B74E4;
+  background-color: rgb(244, 181, 230);
   color: #fff;
   border-radius: 4px;
   border:none;
   font-weight: bold;
   padding: 5px 15px;
+  cursor: pointer;
 }

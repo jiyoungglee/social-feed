@@ -1,0 +1,35 @@
+.post-options {
+  position: relative;
+}
+
+.post-options button {
+  cursor: pointer;
+}
+
+.menu-icon {
+  background: transparent;
+  border: none;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100px;
+  border: solid 1px #ccc;
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.menu button {
+  background: #fff;
+  border: none;
+  text-align: left;
+  padding: 10px;
+}
+
+.menu button:hover {
+  font-weight: bold;
+}

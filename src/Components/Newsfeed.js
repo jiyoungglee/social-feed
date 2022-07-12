@@ -23,10 +23,10 @@ function Newsfeed() {
             key={post.id}
             id={post.id}
             timestamp={post.timestamp}
-            userId={post.userId}
+            username={post.username}
             details={post.postDetails}
             likes={post.likes}
-            onDelete={getPosts}
+            getPosts={getPosts}
           />)
       })
     )

@@ -4,6 +4,11 @@
   background-color: #fff;
 }
 
+.post-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .username {
   font-weight: bold;
 }
@@ -15,6 +20,7 @@
 
 .post-content {
   padding: 20px 0;
+  white-space: pre-wrap;
 }
 
 .likes{ 
@@ -31,6 +37,7 @@
 .post-feedback button {
   border: none;
   background-color: transparent;
-  color: #9c9c9c;
+  color: rgb(244, 181, 230);
   font-weight: bold;
+  cursor: pointer;
 }
