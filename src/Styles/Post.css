@@ -1,0 +1,36 @@
+.post {
+  margin: 5px 0;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.post-time {
+  color: #9c9c9c;
+  font-size: 12px;
+}
+
+.post-content {
+  padding: 20px 0;
+}
+
+.likes{ 
+  color: #9c9c9c;
+  margin-bottom: 10px;
+}
+.post-feedback {
+  display: flex;
+  justify-content: space-around;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.post-feedback button {
+  border: none;
+  background-color: transparent;
+  color: #9c9c9c;
+  font-weight: bold;
+}
