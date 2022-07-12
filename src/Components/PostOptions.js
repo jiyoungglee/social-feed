@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import '../Styles/PostOptions.css';
 
-function PostOptions({ deletePost }) {
+function PostOptions({ deletePost, enableEdit }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -11,7 +11,6 @@ function PostOptions({ deletePost }) {
     function clickHandler(event) {
       if (menuOpen && menuRef.current && !menuRef.current.contains(event.target)) {
         setMenuOpen(false);
-        console.log("clickHandler")
       }
     }
 
@@ -26,15 +25,16 @@ function PostOptions({ deletePost }) {
     setMenuOpen(menuOpen => !menuOpen);
   }
 
-  function editPost() {
-    console.log("To Do: Edit Post");
+  function onEdit() {
+    enableEdit();
+    toggleMenu();
   }
 
   function renderMenu() {
     return (
       <div className="menu">
         <button onClick={deletePost}>Delete</button>
-        <button onClick={editPost}>Edit</button>
+        <button onClick={onEdit}>Edit</button>
       </div>
     )
   }

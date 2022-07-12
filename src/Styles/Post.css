@@ -21,4 +21,5 @@
 .post-content {
   padding: 20px 0;
   white-space: pre-wrap;
+  overflow-wrap: break-word;
 }

@@ -1,9 +1,14 @@
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import '../Styles/Post.css'
 import PostInteraction from './PostInteraction';
 import PostOptions from './PostOptions';
+import EditablePost from './EditablePost';
 
 function Post({ id, timestamp, username, details, likes, getPosts }) {
+  const [postEditable, setPostEditable] = useState(false);
+  const editRef = useRef(null);
+
   async function deletePost() {
     try {
       const response = await axios.delete('/posts/deletepost', { data: {id} });
@@ -14,6 +19,16 @@ function Post({ id, timestamp, username, details, likes, getPosts }) {
     }
   }
 
+  function enableEdit() {
+    setPostEditable(true);
+    editRef.current.focus();
+  }
+
+  function saveEdit() {
+    setPostEditable(false);
+    getPosts();
+  }
+
   return(
     <div className="post">
       <div className="post-header">
@@ -21,9 +36,14 @@ function Post({ id, timestamp, username, details, likes, getPosts }) {
           <div className="username">{username}</div>
           <div className="post-time">{timestamp}</div>
         </div>
-        <PostOptions deletePost={deletePost}/>
+        <PostOptions deletePost={deletePost} enableEdit={enableEdit} />
       </div>
-      <div className="post-content">{details}</div>
+      <div className="post-content">
+      {postEditable ? 
+        <EditablePost id={id} originalPost={details} saveEdit={saveEdit} editRef={editRef} /> : 
+        <div>{details}</div>
+      }
+      </div>
       <PostInteraction id={id} likes={likes} getPosts={getPosts} />
     </div>
   )
