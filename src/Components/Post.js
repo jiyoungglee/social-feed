@@ -21,7 +21,6 @@ function Post({ id, timestamp, username, details, likes, getPosts }) {
 
   function enableEdit() {
     setPostEditable(true);
-    editRef.current.focus();
   }
 
   function saveEdit() {

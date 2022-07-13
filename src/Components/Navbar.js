@@ -22,7 +22,7 @@ function Navbar() {
       </div>
       <div className="navbar-search">
         <div className="searchbox">
-          <FontAwesomeIcon icon={faMagnifyingGlass}  color= "#F4B5E6" />
+          <FontAwesomeIcon icon={faMagnifyingGlass}  color= "#f4b5e6" />
           <input type="search" placeholder="Search Posts..." />
         </div>
         <button>Search</button>

@@ -1,9 +1,17 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import axios from 'axios';
 import '../Styles/CreatePost.css';
 
 function CreatePost({ getPosts }) {
   const [textContent, setTextContent] = useState('');
+  const textRef = useRef(null);
+
+  function autoGrow(event) {
+    if (event.target.scrollHeight > 100) {
+      event.target.style.height = "auto";
+      event.target.style.height = (event.target.scrollHeight) + "px";
+    }
+  }
 
   function handleInputChange(event) {
     setTextContent(event.target.value);
@@ -15,7 +23,14 @@ function CreatePost({ getPosts }) {
     }
   }
 
-  async function uploadPost() {
+  function resetText() {
+    setTextContent('');
+    textRef.current.style.height="auto";
+    textRef.current.blur();
+  }
+
+  async function uploadPost(event) {
+    console.log(event)
     try {
       const response = await axios.post('/posts/insert', {
         userId: 'TestUserId',
@@ -26,13 +41,15 @@ function CreatePost({ getPosts }) {
       console.error(error);
     }
     getPosts();
-    setTextContent('');
+    resetText();
   }
 
   return (
     <div className="new-post">
       <textarea
+        ref={textRef}
         placeholder="What's on your mind?"
+        onInput={autoGrow}
         onChange={handleInputChange}
         value={textContent}
         onKeyDown={handleSubmit}

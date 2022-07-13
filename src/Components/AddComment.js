@@ -6,13 +6,27 @@ function AddComment({ textRef }) {
   const [comments, setComments] = useState([]);
   const [textContent, setTextContent] = useState('');
 
+
+  function autoGrow(event) {
+    if (event.target.scrollHeight > 16) {
+      event.target.style.height = "auto";
+      event.target.style.height = (event.target.scrollHeight) + "px";
+    }
+  }
+
   function handleInputChange(event) {
     setTextContent(event.target.value);
   };
 
+  function resetComment() {
+    setTextContent('');
+    textRef.current.style.height="auto";
+    textRef.current.blur();
+  }
+
   function addComment() {
     setComments(comments => [...comments, textContent]);
-    setTextContent("");
+    resetComment();
   }
 
   function handleSubmit(event) {
@@ -40,6 +54,7 @@ function AddComment({ textRef }) {
           rows="1"
           placeholder="Add your comment..."
           onChange={handleInputChange}
+          onInput={autoGrow}
           value={textContent}
           onKeyDown={handleSubmit}
         />

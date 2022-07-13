@@ -3,6 +3,7 @@ import axios from 'axios';
 import Post from './Post';
 import CreatePost from './CreatePost';
 import Navbar from './Navbar';
+import '../Styles/Newsfeed.css';
 
 function Newsfeed() {
   const [posts, setPosts] = useState([]);
@@ -36,8 +37,10 @@ function Newsfeed() {
   return (
     <div>
       <Navbar />
-      <CreatePost getPosts={getPosts} />
-      {loadPosts()}
+      <div className="newsfeed-content">
+        <CreatePost getPosts={getPosts} />
+        {loadPosts()}
+      </div>
     </div>
   );
 }

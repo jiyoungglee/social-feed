@@ -1,10 +1,10 @@
 .navbar {
   background-color: white;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
 
 .navbar-header {
-  background-color: rgb(239, 212, 252);
+  background-color: #efd4fc;
 }
 
 .navbar h1 {
@@ -28,7 +28,7 @@
   margin: 0 10px;
   padding: 7px 10px;
   border-radius: 10em;
-  background-color: #e9ebee;
+  background-color: #f7f7f7;
 }
 
 .searchbox input {
@@ -43,8 +43,10 @@
 .navbar-search button{
   background-color: transparent;
   border: none;
-  color: #F4B5E6;
+  color: #f4b5e6;
   font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 992px) {
@@ -55,14 +57,14 @@
   }
   
   .navbar.shadow {
-    box-shadow: 0px 1px 10px rgb(207, 207, 207);
+    box-shadow: 0px 1px 10px #efd4fc;
   }
 
   .navbar-header {
     background-color: inherit;
   }
   .navbar h1 {
-    color: #F4B5E6;
+    color: #f4b5e6;
     padding: 10px;
     margin-right: 20px;
   }

@@ -7,10 +7,13 @@
 
 .add-comment textarea {
   width: 100%;
-  font-size: 14px;
+  min-height: 16px;
+  max-height: 500px;
+  font: 14px sans-serif;
   resize: none;
   border: none;
   outline: none;
+  padding: 0 2px;
 }
 
 .reply button {

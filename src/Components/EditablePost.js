@@ -1,9 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Styles/EditablePost.css';
 
 function EditablePost({ id, originalPost, saveEdit, editRef }) {
   const [textContent, setTextContent] = useState(originalPost);
+
+  useEffect(() => {
+    function autoGrow() {
+      if (editRef.current.scrollHeight > 16) {
+        editRef.current.style.height = "auto";
+        editRef.current.style.height = (editRef.current.scrollHeight) + "px";
+      }
+    }
+    autoGrow()
+    editRef.current.focus()
+  },[editRef, textContent]);
 
   function handleInputChange(event) {
     setTextContent(event.target.value);
@@ -28,7 +39,7 @@ function EditablePost({ id, originalPost, saveEdit, editRef }) {
   return (
     <div className="editable-post">
       <textarea
-        rows={textContent.split("\n").length}
+        rows="1"
         ref={editRef}
         onChange={handleInputChange}
         value={textContent}

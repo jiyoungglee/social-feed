@@ -1,5 +1,7 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart, faMessage } from '@fortawesome/free-regular-svg-icons';
 
 import '../Styles/PostInteraction.css';
 import AddComment from './AddComment';
@@ -29,8 +31,8 @@ function PostInteraction({ id, likes, getPosts }) {
     <div>
       <div className="likes">{likes} Likes</div>
       <div className="post-feedback">
-        <button onClick={likePost}>Like</button>
-        <button onClick={toComment}>Comment</button>
+        <button onClick={likePost}><FontAwesomeIcon icon={faHeart} /> Like</button>
+        <button onClick={toComment}><FontAwesomeIcon icon={faMessage} /> Comment</button>
       </div>
       <AddComment textRef={textRef} />
     </div>
