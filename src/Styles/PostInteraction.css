@@ -17,3 +17,7 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.post-feedback button:hover {
+  text-shadow: .25px .25px rgb(244, 181, 230);
+}

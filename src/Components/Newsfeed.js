@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Post from './Post';
 import CreatePost from './CreatePost';
+import Navbar from './Navbar';
 
 function Newsfeed() {
   const [posts, setPosts] = useState([]);
@@ -34,6 +35,7 @@ function Newsfeed() {
 
   return (
     <div>
+      <Navbar />
       <CreatePost getPosts={getPosts} />
       {loadPosts()}
     </div>
