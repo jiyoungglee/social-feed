@@ -23,11 +23,12 @@ function Newsfeed() {
         return (
           <Post 
             key={post.id}
-            id={post.id}
+            postId={post.id}
             timestamp={post.timestamp}
-            username={post.username}
+            username={post.poster}
             details={post.postDetails}
-            likes={post.likes}
+            postLikes={post.postLikes}
+            comments={post.comments}
             getPosts={getPosts}
           />)
       })

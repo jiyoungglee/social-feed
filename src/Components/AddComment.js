@@ -1,13 +1,13 @@
 import { useState } from 'react';
+import axios from 'axios';
 import '../Styles/AddComment.css';
 
-function AddComment({ textRef }) {
-  // To Do: move comments to database
-  const [comments, setComments] = useState([]);
+function AddComment({ textRef, comments, postId, getPosts }) {
   const [textContent, setTextContent] = useState('');
 
 
   function autoGrow(event) {
+    console.log(event.key)
     if (event.target.scrollHeight > 16) {
       event.target.style.height = "auto";
       event.target.style.height = (event.target.scrollHeight) + "px";
@@ -24,10 +24,23 @@ function AddComment({ textRef }) {
     textRef.current.blur();
   }
 
-  function addComment() {
-    setComments(comments => [...comments, textContent]);
-    resetComment();
+  async function addComment() {
+    if (textContent !==""){
+      try {
+        const response = await axios.post('/comments/insert', {
+          userId: 'TestUserId',
+          postId: postId,
+          commentText: textContent,
+        });
+        console.log(response);
+      } catch (error) {
+        console.error(error);
+      }
+      getPosts();
+      resetComment();
+    }
   }
+
 
   function handleSubmit(event) {
     if(event.key === 'Enter' && !event.shiftKey) {
@@ -36,15 +49,17 @@ function AddComment({ textRef }) {
   }
 
   function renderComments() {
-    return comments.map(comment => {
-      return(
-        <div className="comment-wrapper">
-          <div className="comment-details">{comment}</div>
-        </div>
-      )
-    })
+    if (comments[0].commentText) {
+      comments.sort((a,b) => (a.commentTimestamp < b.commentTimestamp) ? 1 : ((b.commentTimestamp < a.commentTimestamp) ? -1 : 0))
+      return comments.map(comment => {
+        return (
+          <div key={comment.commentId} className="comment-wrapper">
+            <div className="comment-details">{comment.commentText}</div>
+          </div>
+        )
+      })
+    }
   }
-
 
   return (
     <div className="comments-section">

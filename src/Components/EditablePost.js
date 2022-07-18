@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../Styles/EditablePost.css';
 
-function EditablePost({ id, originalPost, saveEdit, editRef }) {
+function EditablePost({ postId, originalPost, saveEdit, editRef }) {
   const [textContent, setTextContent] = useState(originalPost);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function EditablePost({ id, originalPost, saveEdit, editRef }) {
 
   async function editPost() {
     try {
-      const response = await axios.put('/posts/updatepost', {id, postDetails: textContent});
+      const response = await axios.put('/posts/updatepost', {id: postId, postDetails: textContent});
       console.log(response);
     } catch (error) {
       console.error(error);

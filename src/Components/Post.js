@@ -5,13 +5,13 @@ import PostInteraction from './PostInteraction';
 import PostOptions from './PostOptions';
 import EditablePost from './EditablePost';
 
-function Post({ id, timestamp, username, details, likes, getPosts }) {
+function Post({ postId, timestamp, username, details, postLikes, comments, getPosts }) {
   const [postEditable, setPostEditable] = useState(false);
   const editRef = useRef(null);
 
   async function deletePost() {
     try {
-      const response = await axios.delete('/posts/deletepost', { data: {id} });
+      const response = await axios.delete('/posts/deletepost', { data: {id: postId} });
       console.log(response);
       getPosts();
     } catch (error) {
@@ -39,11 +39,11 @@ function Post({ id, timestamp, username, details, likes, getPosts }) {
       </div>
       <div className="post-content">
       {postEditable ? 
-        <EditablePost id={id} originalPost={details} saveEdit={saveEdit} editRef={editRef} /> : 
+        <EditablePost postId={postId} originalPost={details} saveEdit={saveEdit} editRef={editRef} /> : 
         <div>{details}</div>
       }
       </div>
-      <PostInteraction id={id} likes={likes} getPosts={getPosts} />
+      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} comments={comments} />
     </div>
   )
 };

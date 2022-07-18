@@ -29,8 +29,7 @@ function CreatePost({ getPosts }) {
     textRef.current.blur();
   }
 
-  async function uploadPost(event) {
-    console.log(event)
+  async function uploadPost() {
     try {
       const response = await axios.post('/posts/insert', {
         userId: 'TestUserId',
