@@ -16,6 +16,10 @@
   padding: 0 2px;
 }
 
+.reply{
+  align-self: flex-end;
+}
+
 .reply button {
   background-color: rgb(244, 181, 230);
   color: #fff;

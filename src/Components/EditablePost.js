@@ -32,7 +32,8 @@ function EditablePost({ postId, originalPost, saveEdit, editRef }) {
 
   function handleEdit(event) {
     if(event.key === 'Enter' && !event.shiftKey) {
-      editPost();
+      event.preventDefault();
+      if (textContent.length !== 0) editPost();
     }
   }
 

@@ -1,6 +1,7 @@
 .navbar {
   background-color: white;
   margin-bottom: 5px;
+  z-index: 10;
 }
 
 .navbar-header {
@@ -28,7 +29,7 @@
   margin: 0 10px;
   padding: 7px 10px;
   border-radius: 10em;
-  background-color: #f7f7f7;
+  background-color: #f0f0f0;
 }
 
 .searchbox input {

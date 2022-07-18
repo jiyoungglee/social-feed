@@ -7,7 +7,6 @@ function AddComment({ textRef, comments, postId, getPosts }) {
 
 
   function autoGrow(event) {
-    console.log(event.key)
     if (event.target.scrollHeight > 16) {
       event.target.style.height = "auto";
       event.target.style.height = (event.target.scrollHeight) + "px";
@@ -25,7 +24,6 @@ function AddComment({ textRef, comments, postId, getPosts }) {
   }
 
   async function addComment() {
-    if (textContent !==""){
       try {
         const response = await axios.post('/comments/insert', {
           userId: 'TestUserId',
@@ -38,13 +36,12 @@ function AddComment({ textRef, comments, postId, getPosts }) {
       }
       getPosts();
       resetComment();
-    }
   }
-
 
   function handleSubmit(event) {
     if(event.key === 'Enter' && !event.shiftKey) {
-      addComment();
+      event.preventDefault();
+      if (textContent.length !== 0) addComment();
     }
   }
 
@@ -74,7 +71,7 @@ function AddComment({ textRef, comments, postId, getPosts }) {
           onKeyDown={handleSubmit}
         />
         <div className="reply">
-          <button onClick={addComment}>Comment</button>
+          <button disabled={(textContent.length === 0)} onClick={addComment}>Comment</button>
         </div>
       </div>
       <div className="comments-view">

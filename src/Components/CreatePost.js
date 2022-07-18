@@ -19,7 +19,8 @@ function CreatePost({ getPosts }) {
 
   function handleSubmit(event) {
     if(event.key === 'Enter' && !event.shiftKey) {
-      uploadPost();
+      event.preventDefault();
+      if (textContent.length !== 0) uploadPost();
     }
   }
 
@@ -41,7 +42,7 @@ function CreatePost({ getPosts }) {
     }
     getPosts();
     resetText();
-  }
+}
 
   return (
     <div className="new-post">
@@ -54,7 +55,7 @@ function CreatePost({ getPosts }) {
         onKeyDown={handleSubmit}
       />
       <div className="submit">
-        <button onClick={uploadPost}>Post</button>
+        <button disabled={(textContent.length === 0)} onClick={uploadPost} >Post</button>
       </div>
     </div>
   )
