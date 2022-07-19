@@ -1,35 +1,21 @@
 import { useState, useRef } from 'react';
 import axios from 'axios';
 import '../Styles/CreatePost.css';
+import TextForm from './TextForm';
 
 function CreatePost({ getPosts }) {
   const [textContent, setTextContent] = useState('');
-  const textRef = useRef(null);
+  const postRef = useRef(null);
 
-  function autoGrow(event) {
-    if (event.target.scrollHeight > 100) {
-      event.target.style.height = "auto";
-      event.target.style.height = (event.target.scrollHeight) + "px";
-    }
-  }
-
-  function handleInputChange(event) {
-    setTextContent(event.target.value);
-  };
-
-  function handleSubmit(event) {
-    if(event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      if (textContent.length !== 0) uploadPost();
-    }
-  }
-
+  // Functions on post submission
+  //Helper function after submit
   function resetText() {
     setTextContent('');
-    textRef.current.style.height="auto";
-    textRef.current.blur();
+    postRef.current.style.height="auto";
+    postRef.current.blur();
   }
 
+  // Main submission function
   async function uploadPost() {
     try {
       const response = await axios.post('/posts/insert', {
@@ -46,13 +32,13 @@ function CreatePost({ getPosts }) {
 
   return (
     <div className="new-post">
-      <textarea
-        ref={textRef}
-        placeholder="What's on your mind?"
-        onInput={autoGrow}
-        onChange={handleInputChange}
-        value={textContent}
-        onKeyDown={handleSubmit}
+      <TextForm 
+        textRef = {postRef}
+        placeholder = "What's on your mind?"
+        submitText = {uploadPost}
+        textContent = {textContent}
+        setTextContent = {setTextContent}
+        minHeight = {100}
       />
       <div className="submit">
         <button disabled={(textContent.length === 0)} onClick={uploadPost} >Post</button>

@@ -1,24 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import '../Styles/EditablePost.css';
+import TextForm from './TextForm';
 
 function EditablePost({ postId, originalPost, saveEdit, editRef }) {
   const [textContent, setTextContent] = useState(originalPost);
-
-  useEffect(() => {
-    function autoGrow() {
-      if (editRef.current.scrollHeight > 16) {
-        editRef.current.style.height = "auto";
-        editRef.current.style.height = (editRef.current.scrollHeight) + "px";
-      }
-    }
-    autoGrow()
-    editRef.current.focus()
-  },[editRef, textContent]);
-
-  function handleInputChange(event) {
-    setTextContent(event.target.value);
-  };
 
   async function editPost() {
     try {
@@ -30,21 +16,16 @@ function EditablePost({ postId, originalPost, saveEdit, editRef }) {
     saveEdit();
   }
 
-  function handleEdit(event) {
-    if(event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      if (textContent.length !== 0) editPost();
-    }
-  }
-
   return (
     <div className="editable-post">
-      <textarea
+      <TextForm
+        textRef = {editRef}
         rows="1"
-        ref={editRef}
-        onChange={handleInputChange}
-        value={textContent}
-        onKeyDown={handleEdit}
+        submitText = {editPost}
+        textContent = {textContent}
+        setTextContent = {setTextContent}
+        minHeight = {16}
+        type= "edit"
       />
     </div>
   )

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import '../Styles/Comment.css';
 
-function Comment( { comments, getPosts } ) {
+function Comment( { details, getPosts } ) {
   function getTime(timestamp) {
     const today = new Date().toISOString().substring(0,10);
     if (timestamp.startsWith(today)) {
@@ -24,34 +24,21 @@ function Comment( { comments, getPosts } ) {
     }
   }
 
-  function renderComments() {
-    if (comments[0].commentText) {
-      comments.sort((a,b) => (a.commentTimestamp < b.commentTimestamp) ? 1 : ((b.commentTimestamp < a.commentTimestamp) ? -1 : 0))
-      return comments.map(({ commentId, postId, commenter, commentText, commentLikes, commentTimestamp }) => {
-        return (
-          <div key={commentId} className="comment-wrapper">
-            <div className="comment-top">
-              <div className="comment-details">
-                <div className="commenter">{commenter}</div>
-                <div className="comment-text">{commentText}</div>
-              </div>
-              <div className="comment-likes">
-                {commentLikes!==0 && `${commentLikes} Likes`}
-              </div>
-            </div>
-            <div className="comment-bottom">
-              <button onClick={() => likeComment(commentId, commentLikes)}><FontAwesomeIcon icon={faHeart} /> Like</button>
-              <div className="comment-time">{getTime(commentTimestamp)}</div>
-            </div>
-          </div>
-        )
-      })
-    }
-  }
-
   return (
-    <div className="comments-view">
-      {renderComments()}
+    <div className="comment-wrapper">
+      <div className="comment-top">
+        <div className="comment-details">
+          <div className="commenter">{details.commenter}</div>
+          <div className="comment-text">{details.commentText}</div>
+        </div>
+        <div className="comment-likes">
+          {details.commentLikes!==0 && `${details.commentLikes} Likes`}
+        </div>
+      </div>
+      <div className="comment-bottom">
+        <button onClick={() => likeComment(details.commentId, details.commentLikes)}><FontAwesomeIcon icon={faHeart} /> Like</button>
+        <div className="comment-time">{getTime(details.commentTimestamp)}</div>
+      </div>
     </div>
   )
 };

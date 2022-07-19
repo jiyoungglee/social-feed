@@ -1,20 +1,10 @@
 import { useState } from 'react';
 import axios from 'axios';
 import '../Styles/AddComment.css';
+import TextForm from './TextForm';
 
 function AddComment({ textRef, postId, getPosts }) {
   const [textContent, setTextContent] = useState('');
-
-  function autoGrow(event) {
-    if (event.target.scrollHeight > 16) {
-      event.target.style.height = "auto";
-      event.target.style.height = (event.target.scrollHeight) + "px";
-    }
-  }
-
-  function handleInputChange(event) {
-    setTextContent(event.target.value);
-  };
 
   function resetComment() {
     setTextContent('');
@@ -37,23 +27,16 @@ function AddComment({ textRef, postId, getPosts }) {
       resetComment();
   }
 
-  function handleSubmit(event) {
-    if(event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      if (textContent.length !== 0) addComment();
-    }
-  }
-
   return (
     <div className="add-comment">
-      <textarea
-        ref={textRef}
+      <TextForm 
+        textRef = {textRef}
         rows="1"
-        placeholder="Add your comment..."
-        onChange={handleInputChange}
-        onInput={autoGrow}
-        value={textContent}
-        onKeyDown={handleSubmit}
+        placeholder = "Add your comment..."
+        submitText = {addComment}
+        textContent = {textContent}
+        setTextContent = {setTextContent}
+        minHeight = {16}
       />
       <div className="reply">
         <button disabled={(textContent.length === 0)} onClick={addComment}>Comment</button>
