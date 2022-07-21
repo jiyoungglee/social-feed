@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import '../Styles/Comment.css';
 
-function Comment( { details, getPosts } ) {
+function Comment( { details, removeComment, getRecent } ) {
   function getTime(timestamp) {
     const today = new Date().toISOString().substring(0,10);
     if (timestamp.startsWith(today)) {
@@ -14,11 +14,21 @@ function Comment( { details, getPosts } ) {
     }
   }
 
-  async function likeComment(commentId, commentLikes) {
+  async function likeComment() {
     try {
-      const response = await axios.put('/comments/updatelikes', {commentId: commentId, commentLikes: commentLikes+1});
+      const response = await axios.put('/comments/updatelikes', {commentId: details.commentId, commentLikes: details.commentLikes+1});
       console.log(response);
-      getPosts();
+      getRecent(details.commentId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function deleteComment() {
+    try {
+      const response = await axios.delete('/comments/deletecomment', { data: {commentId: details.commentId} });
+      console.log(response);
+      removeComment(details.commentId);
     } catch (error) {
       console.error(error);
     }
@@ -36,7 +46,8 @@ function Comment( { details, getPosts } ) {
         </div>
       </div>
       <div className="comment-bottom">
-        <button onClick={() => likeComment(details.commentId, details.commentLikes)}><FontAwesomeIcon icon={faHeart} /> Like</button>
+        <button onClick={likeComment}><FontAwesomeIcon icon={faHeart} /> Like</button>
+        <button onClick={deleteComment}>Delete</button>
         <div className="comment-time">{getTime(details.commentTimestamp)}</div>
       </div>
     </div>

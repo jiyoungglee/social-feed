@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Styles/AddComment.css';
 import TextForm from './TextForm';
 
-function AddComment({ textRef, postId, getPosts }) {
+function AddComment({ textRef, postId, getRecent }) {
   const [textContent, setTextContent] = useState('');
 
   function resetComment() {
@@ -19,11 +19,10 @@ function AddComment({ textRef, postId, getPosts }) {
           postId: postId,
           commentText: textContent,
         });
-        console.log(response);
+        getRecent(response.data.insertId);
       } catch (error) {
         console.error(error);
       }
-      getPosts();
       resetComment();
   }
 

@@ -19,16 +19,16 @@ function Newsfeed() {
 
   function loadPosts() {
     return(
-      posts.map((post) => {
+      posts.map(({ poster, id, postDetails, postLikes, timestamp, commentId, commentText, commentLikes, commentTimestamp, commenter }) => {
         return (
           <Post 
-            key={post.id}
-            postId={post.id}
-            timestamp={post.timestamp}
-            username={post.poster}
-            details={post.postDetails}
-            postLikes={post.postLikes}
-            comments={post.comments}
+            key={id}
+            postId={id}
+            timestamp={timestamp}
+            username={poster}
+            details={postDetails}
+            postLikes={postLikes}
+            topComment={commentId!==null && {commentId, commentText, commentLikes, commentTimestamp, commenter}}
             getPosts={getPosts}
           />)
       })
