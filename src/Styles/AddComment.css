@@ -3,6 +3,7 @@
   padding: 10px 0;
   border-bottom: 1px solid #ccc;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .add-comment textarea {

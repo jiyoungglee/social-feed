@@ -5,7 +5,7 @@ import PostInteraction from './PostInteraction';
 import PostOptions from './PostOptions';
 import EditablePost from './EditablePost';
 
-function Post({ postId, timestamp, username, details, postLikes, topComment, getPosts }) {
+function Post({ postId, timestamp, username, details, postLikes, topComment, commentsCount, getPosts }) {
   const [postEditable, setPostEditable] = useState(false);
   const editRef = useRef(null);
 
@@ -43,7 +43,7 @@ function Post({ postId, timestamp, username, details, postLikes, topComment, get
         <div>{details}</div>
       }
       </div>
-      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} />
+      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} />
     </div>
   )
 };

@@ -1,7 +1,10 @@
-.likes{ 
+.current-feedback{ 
+  display: flex;
+  justify-content: space-between;
   color: #9c9c9c;
   margin-bottom: 10px;
 }
+
 .post-feedback {
   display: flex;
   justify-content: space-around;
@@ -20,4 +23,11 @@
 
 .post-feedback button:hover {
   text-shadow: .25px .25px rgb(244, 181, 230);
+}
+
+.view-all{ 
+  font: bold 16px sans-serif;
+  color: #9c9c9c;
+  cursor: pointer;
+  padding-top: 10px;
 }
