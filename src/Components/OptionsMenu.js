@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import '../Styles/PostOptions.css';
+import '../Styles/OptionsMenu.css';
 
-function PostOptions({ deletePost, enableEdit }) {
+function OptionsMenu({ onDelete, enableEdit }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -33,7 +33,7 @@ function PostOptions({ deletePost, enableEdit }) {
   function renderMenu() {
     return (
       <div className="menu">
-        <button onClick={deletePost}>Delete</button>
+        <button onClick={onDelete}>Delete</button>
         <button onClick={onEdit}>Edit</button>
       </div>
     )
@@ -47,4 +47,4 @@ function PostOptions({ deletePost, enableEdit }) {
   )
 }
 
-export default PostOptions;
+export default OptionsMenu;

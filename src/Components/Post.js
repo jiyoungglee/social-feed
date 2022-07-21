@@ -2,8 +2,8 @@ import { useState, useRef } from 'react';
 import axios from 'axios';
 import '../Styles/Post.css'
 import PostInteraction from './PostInteraction';
-import PostOptions from './PostOptions';
-import EditablePost from './EditablePost';
+import OptionsMenu from './OptionsMenu';
+import Editable from './Editable';
 
 function Post({ postId, timestamp, username, details, postLikes, topComment, commentsCount, getPosts }) {
   const [postEditable, setPostEditable] = useState(false);
@@ -23,7 +23,13 @@ function Post({ postId, timestamp, username, details, postLikes, topComment, com
     setPostEditable(true);
   }
 
-  function saveEdit() {
+  async function editPost(newText) {
+    try {
+      const response = await axios.put('/posts/updatepost', {id: postId, postDetails: newText});
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
     setPostEditable(false);
     getPosts();
   }
@@ -35,13 +41,13 @@ function Post({ postId, timestamp, username, details, postLikes, topComment, com
           <div className="username">{username}</div>
           <div className="post-time">{timestamp}</div>
         </div>
-        <PostOptions deletePost={deletePost} enableEdit={enableEdit} />
+        <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />
       </div>
       <div className="post-content">
-      {postEditable ? 
-        <EditablePost postId={postId} originalPost={details} saveEdit={saveEdit} editRef={editRef} /> : 
+        {postEditable ? 
+        <Editable postId={postId} originalText={details} saveEdit={editPost} editRef={editRef} /> : 
         <div>{details}</div>
-      }
+        }
       </div>
       <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} />
     </div>
