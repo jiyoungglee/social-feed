@@ -10,6 +10,7 @@ function Comment( { details, removeComment, getRecent } ) {
   const [commentEditable, setCommentEditable] = useState(false);
   const editRef = useRef(null);
 
+
   function enableEdit() {
     setCommentEditable(true);
   }
@@ -75,10 +76,16 @@ function Comment( { details, removeComment, getRecent } ) {
         </div>
         <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} />
       </div>
-      <div className="comment-bottom">
-        <button onClick={likeComment}>Like</button>
-        <div className="comment-time">{getTime(details.commentTimestamp)}</div>
-      </div>
+      {commentEditable ?
+        <div className="edit-comment">
+          <span onClick={() => editComment(editRef.current.value)}>Save</span>
+          <span onClick={() => setCommentEditable(false)}>Cancel</span>
+        </div> :
+        <div className="comment-bottom">
+          <button onClick={likeComment}>Like</button>
+          <div className="comment-time">{getTime(details.commentTimestamp)}</div>
+        </div>
+      }
     </div>
   )
 };

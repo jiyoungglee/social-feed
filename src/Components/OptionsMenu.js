@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import '../Styles/OptionsMenu.css';
+import PopupAlert from './PopupAlert';
 
 function OptionsMenu({ onDelete, enableEdit }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [confirmRequired, setConfirmRequired] = useState(false);
   const menuRef = useRef(null);
 
   useEffect( () => {
@@ -30,17 +32,24 @@ function OptionsMenu({ onDelete, enableEdit }) {
     toggleMenu();
   }
 
+  function confirmDelete() {
+    setConfirmRequired(true);
+    toggleMenu();
+  }
+
+
   function renderMenu() {
     return (
       <div className="menu">
-        <button onClick={onDelete}>Delete</button>
+        <button onClick={confirmDelete}>Delete</button>
         <button onClick={onEdit}>Edit</button>
       </div>
     )
   }
 
   return (
-    <div className="post-options" ref={menuRef}>
+    <div className="options" ref={menuRef}>
+      {confirmRequired && <PopupAlert onConfirm={onDelete} onCancel={() => setConfirmRequired(false)} />}
       <button className="menu-icon" onClick={toggleMenu}><FontAwesomeIcon icon={faEllipsisVertical} /></button>
       {menuOpen && renderMenu()}
     </div>

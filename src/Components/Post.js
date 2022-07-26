@@ -45,7 +45,11 @@ function Post({ postId, timestamp, username, details, postLikes, topComment, com
       </div>
       <div className="post-content">
         {postEditable ? 
-        <Editable postId={postId} originalText={details} saveEdit={editPost} editRef={editRef} /> : 
+        <div className="editable-post">
+          <Editable postId={postId} originalText={details} saveEdit={editPost} editRef={editRef} />
+          <span onClick={() => editPost(editRef.current.value)}>Save</span>
+          <span onClick={() => setPostEditable(false)}>Cancel</span>
+        </div> : 
         <div>{details}</div>
         }
       </div>

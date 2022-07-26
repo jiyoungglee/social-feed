@@ -36,6 +36,13 @@
   padding:0;
 }
 
+.editable-post span {
+  cursor: pointer;
+  margin-right: 10px;
+  font: 12px sans-serif;
+  color: #f4b5e6;
+}
+
 @media only screen and (min-width: 992px) {
   .post {
     border-radius: 10px;

@@ -55,6 +55,13 @@
   padding: 3px;
 }
 
+.edit-comment span{
+  cursor: pointer;
+  margin-right: 10px;
+  font: 12px sans-serif;
+  color: #f4b5e6;
+}
+
 .comment-bottom {
   display: flex;
 }
