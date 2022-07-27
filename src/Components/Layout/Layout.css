@@ -1,0 +1,6 @@
+@media only screen and (min-width: 992px) {
+  .page-layout {
+    margin: auto;
+    max-width: 600px;
+  }
+}

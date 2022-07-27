@@ -1,0 +1,45 @@
+import { useState } from 'react';
+import {useNavigate } from 'react-router-dom';
+import '../Styles/Search.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+
+function Search() {
+  const [textContent, setTextContent] = useState('');
+  let navigate = useNavigate();
+
+  function searchFor() {
+    console.log(textContent)
+    navigate(`/searchResults/${textContent}`)
+    setTextContent('');
+  }
+
+  function handleInputChange(event) {
+    setTextContent(event.target.value);
+  };
+
+  function handleSubmit(event) {
+    if(event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      if (textContent.length !== 0) searchFor();
+    }
+  }
+
+  return (
+    <div className="navbar-search">
+      <div className="searchbox">
+        <FontAwesomeIcon icon={faMagnifyingGlass}  color= "#f4b5e6" />
+        <input 
+          type="search"
+          placeholder="Search Posts..."
+          onChange={handleInputChange}
+          value={textContent}
+          onKeyDown={handleSubmit}
+        />
+      </div>
+      <button disabled={(textContent.length === 0)} onClick={searchFor}>Search</button>
+    </div>
+  )
+}
+
+export default Search;

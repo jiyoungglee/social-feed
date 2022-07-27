@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import '../Styles/Navbar.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import Search from '../Search';
+import './Navbar.css';
+
 
 function Navbar() {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -18,15 +19,9 @@ function Navbar() {
   return (
     <div className={scrollPosition === 0 ? "navbar" : "navbar shadow" }>
       <div className="navbar-header">
-        <h1>Social Feed</h1>
+        <Link to="/"><h1>Social Feed</h1></Link>
       </div>
-      <div className="navbar-search">
-        <div className="searchbox">
-          <FontAwesomeIcon icon={faMagnifyingGlass}  color= "#f4b5e6" />
-          <input type="search" placeholder="Search Posts..." />
-        </div>
-        <button>Search</button>
-      </div>
+      <Search />
     </div>
   )
 }
