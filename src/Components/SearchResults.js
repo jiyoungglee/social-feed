@@ -1,10 +1,11 @@
 import PostsLoad from "./PostsLoad";
 import axios from "axios";
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 function SearchResults() {
-  let  { searchQuery } = useParams();
+  // let  { searchQuery } = useParams();
+  const [searchParams] = useSearchParams();
   const [posts, setPosts] = useState([])
 
   async function fetchResults(query) {
@@ -15,12 +16,14 @@ function SearchResults() {
   }
 
   useEffect(() => {
+    const searchQuery = searchParams.get("searchQuery");
     const queryBody = `%${searchQuery}%`
     fetchResults(queryBody);
-  }, [searchQuery]);
+  }, [searchParams]);
 
   return (
     <div>
+      {posts.length === 0 && "No Results"}
       <PostsLoad posts={posts} getPosts={fetchResults} />
     </div>
   )

@@ -8,9 +8,8 @@ function App() {
     <Layout>
       <Routes>
         <Route path="/" element={<Newsfeed />} />
-        <Route path="/searchResults">
-          <Route path=":searchQuery" element={<SearchResults />} />
-        </Route>
+        <Route path="/searchResults" element={<SearchResults />} />
+        
       </Routes>
     </Layout>
   );

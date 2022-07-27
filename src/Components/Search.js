@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {useNavigate } from 'react-router-dom';
+import {useNavigate, createSearchParams } from 'react-router-dom';
 import '../Styles/Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -9,9 +9,10 @@ function Search() {
   let navigate = useNavigate();
 
   function searchFor() {
-    console.log(textContent)
-    navigate(`/searchResults/${textContent}`)
-    setTextContent('');
+    navigate({
+      pathname: `/searchResults`,
+      search:`?${createSearchParams({searchQuery: textContent})}`
+    });
   }
 
   function handleInputChange(event) {
