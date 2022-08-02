@@ -6,7 +6,7 @@ import '../Styles/Comment.css';
 import Editable from './Editable';
 import OptionsMenu from './OptionsMenu';
 
-function Comment( { details, removeComment, getRecent } ) {
+function Comment( { details, removeComment, getRecent, currentUser } ) {
   const [commentEditable, setCommentEditable] = useState(false);
   const editRef = useRef(null);
 
@@ -74,7 +74,7 @@ function Comment( { details, removeComment, getRecent } ) {
           </div>
         }
         </div>
-        <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} />
+        {details.commenterId === currentUser && <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} />}
       </div>
       {commentEditable ?
         <div className="edit-comment">

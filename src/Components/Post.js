@@ -5,7 +5,7 @@ import PostInteraction from './PostInteraction';
 import OptionsMenu from './OptionsMenu';
 import Editable from './Editable';
 
-function Post({ postId, timestamp, username, details, postLikes, topComment, commentsCount, getPosts }) {
+function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, getPosts, currentUser }) {
   const [postEditable, setPostEditable] = useState(false);
   const editRef = useRef(null);
 
@@ -41,7 +41,8 @@ function Post({ postId, timestamp, username, details, postLikes, topComment, com
           <div className="username">{username}</div>
           <div className="post-time">{timestamp}</div>
         </div>
-        <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />
+        {userId === currentUser &&
+        <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />}
       </div>
       <div className="post-content">
         {postEditable ? 
@@ -49,11 +50,12 @@ function Post({ postId, timestamp, username, details, postLikes, topComment, com
           <Editable postId={postId} originalText={details} saveEdit={editPost} editRef={editRef} />
           <span onClick={() => editPost(editRef.current.value)}>Save</span>
           <span onClick={() => setPostEditable(false)}>Cancel</span>
-        </div> : 
+        </div>
+        : 
         <div>{details}</div>
         }
       </div>
-      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} />
+      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} currentUser={currentUser} />
     </div>
   )
 };

@@ -15,7 +15,7 @@ function AddComment({ textRef, postId, getRecent }) {
   async function addComment() {
       try {
         const response = await axios.post('/comments/insert', {
-          userId: 'TestUserId',
+          userId: 11,
           postId: postId,
           commentText: textContent,
         });

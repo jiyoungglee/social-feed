@@ -6,7 +6,7 @@ import '../Styles/PostInteraction.css';
 import AddComment from './AddComment';
 import Comment from './Comment';
 
-function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCount }) {
+function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCount, currentUser }) {
   const textRef = useRef(null);
   const [comments, setComments] = useState(topComment && [topComment])
   const [numberComments, setnumberComments] = useState(commentsCount)
@@ -19,7 +19,7 @@ function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCoun
   function loadComments() {
     if (comments) {
       return comments.map((comment) => {
-        return <Comment key={comment.commentId} details={comment} removeComment={removeComment} getRecent={getRecent} />
+        return <Comment key={comment.commentId} details={comment} removeComment={removeComment} getRecent={getRecent} currentUser={currentUser} />
       })
     }
   }

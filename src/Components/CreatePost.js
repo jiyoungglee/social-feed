@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../Styles/CreatePost.css';
 import TextForm from './TextForm';
 
-function CreatePost({ getPosts }) {
+function CreatePost({ getPosts, currentUser }) {
   const [textContent, setTextContent] = useState('');
   const postRef = useRef(null);
 
@@ -19,7 +19,7 @@ function CreatePost({ getPosts }) {
   async function uploadPost() {
     try {
       const response = await axios.post('/posts/insert', {
-        userId: 'TestUserId',
+        userId: currentUser,
         postDetails: textContent,
       });
       console.log(response);

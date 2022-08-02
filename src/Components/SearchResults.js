@@ -4,9 +4,10 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom'
 
 function SearchResults() {
-  // let  { searchQuery } = useParams();
+  const [posts, setPosts] = useState([]);
   const [searchParams] = useSearchParams();
-  const [posts, setPosts] = useState([])
+  const searchQuery = searchParams.get("searchQuery");
+  
 
   async function fetchResults(query) {
     const response = await axios.put('/posts/getResults', {
@@ -16,10 +17,9 @@ function SearchResults() {
   }
 
   useEffect(() => {
-    const searchQuery = searchParams.get("searchQuery");
     const queryBody = `%${searchQuery}%`
     fetchResults(queryBody);
-  }, [searchParams]);
+  }, [searchQuery]);
 
   return (
     <div>
