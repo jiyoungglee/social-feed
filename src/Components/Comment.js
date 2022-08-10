@@ -1,12 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import '../Styles/Comment.css';
+import '../styles/Comment.css';
 import Editable from './Editable';
 import OptionsMenu from './OptionsMenu';
+import { UserContext } from '../store/UserContext';
 
-function Comment( { details, removeComment, getRecent, currentUser } ) {
+function Comment( { details, removeComment, getRecent } ) {
+  const { state } = useContext(UserContext);
   const [commentEditable, setCommentEditable] = useState(false);
   const editRef = useRef(null);
 
@@ -74,7 +76,7 @@ function Comment( { details, removeComment, getRecent, currentUser } ) {
           </div>
         }
         </div>
-        {details.commenterId === currentUser && <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} />}
+        {details.commenterId === state.userId && <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} />}
       </div>
       {commentEditable ?
         <div className="edit-comment">

@@ -1,4 +1,4 @@
-import '../Styles/PopupAlert.css';
+import '../styles/PopupAlert.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 

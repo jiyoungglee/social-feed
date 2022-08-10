@@ -1,11 +1,13 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
-import '../Styles/Post.css'
+import '../styles/Post.css'
 import PostInteraction from './PostInteraction';
 import OptionsMenu from './OptionsMenu';
 import Editable from './Editable';
+import { UserContext } from '../store/UserContext';
 
-function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, getPosts, currentUser }) {
+function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, getPosts }) {
+  const { state } = useContext(UserContext);
   const [postEditable, setPostEditable] = useState(false);
   const editRef = useRef(null);
 
@@ -41,7 +43,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
           <div className="username">{username}</div>
           <div className="post-time">{timestamp}</div>
         </div>
-        {userId === currentUser &&
+        {userId === state.userId &&
         <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />}
       </div>
       <div className="post-content">
@@ -55,7 +57,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
         <div>{details}</div>
         }
       </div>
-      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} currentUser={currentUser} />
+      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} />
     </div>
   )
 };

@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
-import '../Styles/CreatePost.css';
+import '../styles/CreatePost.css';
 import TextForm from './TextForm';
+import { UserContext } from '../store/UserContext';
 
-function CreatePost({ getPosts, currentUser }) {
+function CreatePost({ getPosts }) {
+  const { state } = useContext(UserContext);
   const [textContent, setTextContent] = useState('');
   const postRef = useRef(null);
 
@@ -19,7 +21,7 @@ function CreatePost({ getPosts, currentUser }) {
   async function uploadPost() {
     try {
       const response = await axios.post('/posts/insert', {
-        userId: currentUser,
+        userId: state.userId,
         postDetails: textContent,
       });
       console.log(response);

@@ -1,4 +1,4 @@
-import PostsLoad from "./PostsLoad";
+import PostsLoad from "../PostsLoad";
 import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom'

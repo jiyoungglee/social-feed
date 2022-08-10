@@ -2,14 +2,14 @@ import { useState, useRef } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-regular-svg-icons';
-import '../Styles/PostInteraction.css';
+import '../styles/PostInteraction.css';
 import AddComment from './AddComment';
 import Comment from './Comment';
 
-function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCount, currentUser }) {
+function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCount }) {
   const textRef = useRef(null);
-  const [comments, setComments] = useState(topComment && [topComment])
-  const [numberComments, setnumberComments] = useState(commentsCount)
+  const [comments, setComments] = useState(topComment ? [topComment] : [])
+  const [numberComments, setnumberComments] = useState(commentsCount ? commentsCount : 0)
 
   async function fetchComments() {
     const response = await axios.get(`/comments/getComments/${postId}`);
@@ -18,9 +18,9 @@ function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCoun
 
   function loadComments() {
     if (comments) {
-      return comments.map((comment) => {
-        return <Comment key={comment.commentId} details={comment} removeComment={removeComment} getRecent={getRecent} currentUser={currentUser} />
-      })
+      return comments.map((comment) =>
+        <Comment key={comment.commentId} details={comment} removeComment={removeComment} getRecent={getRecent} />
+      )
     }
   }
 
@@ -42,25 +42,15 @@ function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCoun
 
   async function getRecent(id) {
     const response = await axios.get(`/comments/getComment/${id}`);
-    if(!comments) {
-      setComments(response.data)
-      setnumberComments(1)
+    const recentComment = response.data[0];
+    const commentIndex = comments.findIndex(comment => comment.commentId===id)
+    if(commentIndex === -1) {
+      setComments(comments => [recentComment, ...comments])
+      setnumberComments(numberComments => numberComments + 1)
     }
     else {
-      const commentIndex = comments.findIndex(comment => comment.commentId===id)
-      if(commentIndex === -1) {
-        setComments(comments => [...response.data, ...comments])
-        setnumberComments(numberComments => numberComments + 1)
-      }
-      else {
-        setComments(comments => {
-          comments.splice(commentIndex, 1, response.data[0]);
-          console.log(comments)
-          const updatedComments = [...comments];
-          return updatedComments;
-        })
-      }
-    }
+      setComments(comments => comments.map((comment, i) => i === commentIndex ? recentComment : comment))
+    } 
   }
 
   function removeComment(id) {

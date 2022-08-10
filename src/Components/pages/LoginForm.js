@@ -1,42 +1,49 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Actions, UserContext } from "../../store/UserContext";
 
-function Register() {
+function Login() {
+  const { dispatch } = useContext(UserContext);
   const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const usernameRef = useRef();
 
-  async function registerUser(userData) {
+  async function loginUser(userData) {
     try {
-      await axios.post('/users/register', userData);
-      navigate('/login', {replace:true})
+      const response = await axios.post('/users/login', userData);
+      dispatch({
+        type: Actions.UPDATE,
+        payload: {
+          userId: response.data.userId,
+          email: response.data.email
+        }
+      })
+      navigate('/', {replace:true});
     } catch (error) {
-      console.error(error);
+      dispatch({
+        type: Actions.RESET
+      })
     }
   }
 
   async function submitHandler(event) {
     event.preventDefault();
 
-    const enteredName = usernameRef.current.value;
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
 
-    const registrationData = {
+    const loginData = {
       email: enteredEmail,
       pw: enteredPassword,
-      username: enteredName
     }
-    registerUser(registrationData);
+    loginUser(loginData);
   }
 
   return (
     <div>
-      <h1>Register Page</h1>
+      <h1>Login Page</h1>
       <form onSubmit={submitHandler}>
-        <div>Enter Name:<input type="text" name="name" ref={usernameRef}/></div>
         <div>Enter Email:<input type="text" name="email" ref={emailRef}/></div>
         <div>Enter Password:<input type="password" name="password" ref={passwordRef} /></div>
         <input type="submit" value="Submit" />
@@ -45,4 +52,4 @@ function Register() {
   )
 }
 
-export default Register;
+export default Login;

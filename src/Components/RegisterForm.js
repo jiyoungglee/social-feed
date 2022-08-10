@@ -1,50 +1,37 @@
 import { useRef } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
-function Login() {
-  const navigate = useNavigate();
+function RegisterForm({ login, register }) {
   const emailRef = useRef();
   const passwordRef = useRef();
-
-  async function loginUser(userData) {
-    try {
-      await axios.post('/users/login', userData);
-      navigate('/', {replace:true});
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function getUser() {
-    const response = await axios.get('/users/currentUser');
-    console.log(response);
-  }
+  const usernameRef = useRef();
 
   async function submitHandler(event) {
     event.preventDefault();
 
+    const enteredName = usernameRef.current.value;
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
 
-    const loginData = {
+    const registrationData = {
       email: enteredEmail,
       pw: enteredPassword,
+      username: enteredName
     }
-    loginUser(loginData);
+    await register(registrationData);
+    login(registrationData);
   }
 
   return (
     <div>
-      <h1>Login Page</h1>
+      <h1>Register Page</h1>
       <form onSubmit={submitHandler}>
+        <div>Enter Name:<input type="text" name="name" ref={usernameRef}/></div>
         <div>Enter Email:<input type="text" name="email" ref={emailRef}/></div>
         <div>Enter Password:<input type="password" name="password" ref={passwordRef} /></div>
         <input type="submit" value="Submit" />
       </form>
-      <button onClick={getUser}>Get User</button>
     </div>
   )
 }
 
-export default Login;
+export default RegisterForm;

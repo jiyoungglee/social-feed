@@ -1,6 +1,6 @@
 import Post from "./Post";
 
-function PostsLoad({ posts, getPosts, currentUser }) {
+function PostsLoad({ posts, getPosts }) {
   return (
     <div>
       {posts.map(({ poster, posterId, id, postDetails, postLikes, timestamp, commentId, commentText, commentLikes, commentTimestamp, commenter, commenterId, commentsCount }) => {
@@ -16,7 +16,6 @@ function PostsLoad({ posts, getPosts, currentUser }) {
             topComment={commentId!==null && {commenterId, commentId, commentText, commentLikes, commentTimestamp, commenter}}
             commentsCount={commentsCount}
             getPosts={getPosts}
-            currentUser={currentUser}
           />)
       })}
     </div>

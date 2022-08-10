@@ -1,12 +1,15 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Search from '../Search';
 import './Navbar.css';
 import axios from 'axios';
+import { Actions, UserContext } from '../../store/UserContext';
 
 
 function Navbar() {
+  const { state, dispatch } = useContext(UserContext);
   const [scrollPosition, setScrollPosition] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     function updatePosition() {
@@ -18,8 +21,13 @@ function Navbar() {
   },[]);
 
   async function logout() {
-    const response = await axios.post('/users/logout');
-    console.log(response);
+    if(state.userId) {
+      await axios.post('/users/logout');
+    }
+    dispatch({
+      type: Actions.RESET
+    });
+    navigate('/login', {replace:true});
   }
 
   return (
@@ -28,7 +36,7 @@ function Navbar() {
         <Link to="/"><h1>Social Feed</h1></Link>
       </div>
       <Search />
-      <button onClick={logout}>Log Out</button>
+      <button onClick={logout}>{state.userId ? 'Log Out' : 'Register or Log In'}</button>
     </div>
   )
 }

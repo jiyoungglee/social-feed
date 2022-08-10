@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import axios from 'axios';
-import '../Styles/AddComment.css';
+import '../styles/AddComment.css';
 import TextForm from './TextForm';
+import { UserContext } from '../store/UserContext';
 
 function AddComment({ textRef, postId, getRecent }) {
+  const { state } = useContext(UserContext);
   const [textContent, setTextContent] = useState('');
 
   function resetComment() {
@@ -15,7 +17,7 @@ function AddComment({ textRef, postId, getRecent }) {
   async function addComment() {
       try {
         const response = await axios.post('/comments/insert', {
-          userId: 11,
+          userId: state.userId,
           postId: postId,
           commentText: textContent,
         });
