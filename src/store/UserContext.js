@@ -15,7 +15,7 @@ const reducer = (state, {type, payload}) => {
           userId: payload.userId,
         }
       case Actions.RESET:
-        return initialState;
+        return {userId: null};
       default: return state;
     }
 }
@@ -25,6 +25,7 @@ export const UserContext = createContext(initialState);
 export default function UserContextProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const value = { state, dispatch };
+  console.log(state)
 
   return(
     <UserContext.Provider value={value}>

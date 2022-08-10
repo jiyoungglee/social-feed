@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import Newsfeed from './components/pages/Newsfeed';
 import SearchResults from './components/pages/SearchResults';
@@ -9,7 +9,7 @@ import RegisterLogin from './components/pages/RegisterLogin';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
-
+  console.log(state)
   useEffect(() => {
     async function getCurrentUser() {
     try {
@@ -26,15 +26,18 @@ function App() {
       })
     }}
     getCurrentUser();
-  }, [dispatch])
+
+  },[])
 
   return (
     <Layout>
       <Routes>
-        <Route path="/login" element={<RegisterLogin />} />
         <Route 
-          path="/"
-          element={state.userId ? <Newsfeed /> : <Navigate to="/login" />}
+          exact path="/"
+          element={
+            typeof state.userId !== 'undefined' 
+            && (state.userId ? <Newsfeed /> : <RegisterLogin />)
+          }
         />
         <Route path="/searchResults" element={<SearchResults />} />
       </Routes>

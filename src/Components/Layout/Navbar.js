@@ -27,7 +27,7 @@ function Navbar() {
     dispatch({
       type: Actions.RESET
     });
-    navigate('/login', {replace:true});
+    navigate('/', {replace:true});
   }
 
   return (
@@ -36,7 +36,7 @@ function Navbar() {
         <Link to="/"><h1>Social Feed</h1></Link>
       </div>
       <Search />
-      <button onClick={logout}>{state.userId ? 'Log Out' : 'Register or Log In'}</button>
+      {state.userId && <button onClick={logout}>Log Out</button>}
     </div>
   )
 }
