@@ -20,11 +20,10 @@ function CreatePost({ getPosts }) {
   // Main submission function
   async function uploadPost() {
     try {
-      const response = await axios.post('/posts/insert', {
+      await axios.post('/posts/insert', {
         userId: state.userId,
         postDetails: textContent,
       });
-      console.log(response);
     } catch (error) {
       console.error(error);
     }

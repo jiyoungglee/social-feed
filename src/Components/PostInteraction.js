@@ -27,8 +27,7 @@ function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCoun
   // Like Button
   async function likePost() {
     try {
-      const response = await axios.put('/posts/updatelikes', {id: postId, postLikes: postLikes+1});
-      console.log(response);
+      await axios.put('/posts/updatelikes', {id: postId, postLikes: postLikes+1});
       getPosts();
     } catch (error) {
       console.error(error);

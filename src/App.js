@@ -9,7 +9,6 @@ import RegisterLogin from './components/pages/RegisterLogin';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
-  console.log(state)
   useEffect(() => {
     async function getCurrentUser() {
     try {
@@ -27,7 +26,7 @@ function App() {
     }}
     getCurrentUser();
 
-  },[])
+  },[dispatch])
 
   return (
     <Layout>

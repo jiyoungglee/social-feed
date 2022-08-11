@@ -29,8 +29,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function likeComment() {
     try {
-      const response = await axios.put('/comments/updatelikes', {commentId: details.commentId, commentLikes: details.commentLikes+1});
-      console.log(response);
+      await axios.put('/comments/updatelikes', {commentId: details.commentId, commentLikes: details.commentLikes+1});
       getRecent(details.commentId);
     } catch (error) {
       console.error(error);
@@ -39,8 +38,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function deleteComment() {
     try {
-      const response = await axios.delete('/comments/deletecomment', { data: {commentId: details.commentId} });
-      console.log(response);
+      await axios.delete('/comments/deletecomment', { data: {userId: state.userId, commentId: details.commentId} });
       removeComment(details.commentId);
     } catch (error) {
       console.error(error);
@@ -49,8 +47,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function editComment(newText) {
     try {
-      const response = await axios.put('/comments/updatecomment', {commentId: details.commentId, commentText: newText});
-      console.log(response);
+      await axios.put('/comments/updatecomment', {userId: state.userId, commentId: details.commentId, commentText: newText});
     } catch (error) {
       console.error(error);
     }

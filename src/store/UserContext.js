@@ -25,7 +25,6 @@ export const UserContext = createContext(initialState);
 export default function UserContextProvider(props) {
   const [state, dispatch] = useReducer(reducer, initialState)
   const value = { state, dispatch };
-  console.log(state)
 
   return(
     <UserContext.Provider value={value}>

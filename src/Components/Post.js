@@ -13,8 +13,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
 
   async function deletePost() {
     try {
-      const response = await axios.delete('/posts/deletepost', { data: {id: postId} });
-      console.log(response);
+      await axios.delete('/posts/deletepost', { data: {userId: state.userId, id: postId} });
       getPosts();
     } catch (error) {
       console.error(error);
@@ -27,8 +26,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
 
   async function editPost(newText) {
     try {
-      const response = await axios.put('/posts/updatepost', {id: postId, postDetails: newText});
-      console.log(response);
+      await axios.put('/posts/updatepost', {userId: state.userId, id: postId, postDetails: newText});
     } catch (error) {
       console.error(error);
     }
