@@ -1,5 +1,5 @@
 .navbar {
-  background-color: white;
+  background-color: #fff;
   margin-bottom: 5px;
   z-index: 10;
 }
@@ -32,6 +32,10 @@
 
   .navbar-header {
     background-color: inherit;
+  }
+
+  .navbar-left {
+    display: flex;
   }
   .navbar h1 {
     color: #f4b5e6;

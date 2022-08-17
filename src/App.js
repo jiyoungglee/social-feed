@@ -6,6 +6,7 @@ import SearchResults from './components/pages/SearchResults';
 import axios from 'axios';
 import { Actions, UserContext } from './store/UserContext';
 import RegisterLogin from './components/pages/RegisterLogin';
+import ProfilePage from './components/pages/ProfilePage';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
@@ -39,6 +40,7 @@ function App() {
           }
         />
         <Route path="/searchResults" element={<SearchResults />} />
+        <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>
     </Layout>
   );
