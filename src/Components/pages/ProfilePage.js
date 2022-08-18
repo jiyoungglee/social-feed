@@ -16,14 +16,14 @@ function ProfilePage() {
   }
 
   useEffect(() => {
-    const endpoint = `/posts/getUserPosts/${userId}`;
+    const endpoint = `/posts/getPosts/${userId}`;
     getUserPosts(endpoint);
   },[userId]);
 
   return (
     <div>
-      { state.userId === Number(userId) && <CreatePost getPosts={getUserPosts} /> }
-      <PostsLoad posts={posts} getPosts={getUserPosts} /> 
+      { state.userId === Number(userId) && <CreatePost getPosts={() => getUserPosts(`/posts/getPosts/${userId}`)} /> }
+      <PostsLoad posts={posts} setPosts={setPosts} /> 
     </div>
   )
 }

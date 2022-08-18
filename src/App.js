@@ -10,6 +10,7 @@ import ProfilePage from './components/pages/ProfilePage';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
+
   useEffect(() => {
     async function getCurrentUser() {
     try {

@@ -6,7 +6,7 @@ import OptionsMenu from './OptionsMenu';
 import Editable from './Editable';
 import { UserContext } from '../store/UserContext';
 
-function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, getPosts }) {
+function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, updatePost, removePost }) {
   const { state } = useContext(UserContext);
   const [postEditable, setPostEditable] = useState(false);
   const editRef = useRef(null);
@@ -14,7 +14,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
   async function deletePost() {
     try {
       await axios.delete('/posts/deletepost', { data: {userId: state.userId, id: postId} });
-      getPosts();
+      removePost(postId);
     } catch (error) {
       console.error(error);
     }
@@ -31,7 +31,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
       console.error(error);
     }
     setPostEditable(false);
-    getPosts();
+    updatePost(postId);
   }
 
   return(
@@ -41,21 +41,19 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
           <div className="username">{username}</div>
           <div className="post-time">{timestamp}</div>
         </div>
-        {userId === state.userId &&
-        <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />}
+        {userId === state.userId 
+          && <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />}
       </div>
       <div className="post-content">
-        {postEditable ? 
-        <div className="editable-post">
-          <Editable postId={postId} originalText={details} saveEdit={editPost} editRef={editRef} />
-          <span onClick={() => editPost(editRef.current.value)}>Save</span>
-          <span onClick={() => setPostEditable(false)}>Cancel</span>
-        </div>
-        : 
-        <div>{details}</div>
-        }
+        {postEditable 
+          ? <div className="editable-post">
+              <Editable postId={postId} originalText={details} saveEdit={editPost} editRef={editRef} />
+              <span onClick={() => editPost(editRef.current.value)}>Save</span>
+              <span onClick={() => setPostEditable(false)}>Cancel</span>
+            </div>
+          : <div className="view-post">{details}</div>}
       </div>
-      <PostInteraction postId={postId} postLikes={postLikes} getPosts={getPosts} topComment={topComment} commentsCount={commentsCount} />
+      <PostInteraction postId={postId} postLikes={postLikes} updatePost={updatePost} topComment={topComment} commentsCount={commentsCount} />
     </div>
   )
 };

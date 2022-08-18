@@ -6,7 +6,7 @@ import '../styles/PostInteraction.css';
 import AddComment from './AddComment';
 import Comment from './Comment';
 
-function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCount }) {
+function PostInteraction({ postId, postLikes, topComment, commentsCount, updatePost }) {
   const textRef = useRef(null);
   const [comments, setComments] = useState(topComment ? [topComment] : [])
   const [numberComments, setnumberComments] = useState(commentsCount ? commentsCount : 0)
@@ -28,7 +28,7 @@ function PostInteraction({ postId, postLikes, getPosts, topComment, commentsCoun
   async function likePost() {
     try {
       await axios.put('/posts/updatelikes', {id: postId, postLikes: postLikes+1});
-      getPosts();
+      updatePost(postId);
     } catch (error) {
       console.error(error);
     }

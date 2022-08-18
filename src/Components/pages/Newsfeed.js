@@ -18,7 +18,7 @@ function Newsfeed() {
   return (
     <div className="newsfeed-content">
       <CreatePost getPosts={getAllPosts} />
-      <PostsLoad posts={posts} getPosts={getAllPosts} />
+      <PostsLoad posts={posts} setPosts={setPosts} />
     </div>
   );
 }

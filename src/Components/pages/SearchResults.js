@@ -24,7 +24,7 @@ function SearchResults() {
   return (
     <div>
       {posts.length === 0 && "No Results"}
-      <PostsLoad posts={posts} getPosts={fetchResults} />
+      <PostsLoad posts={posts} setPosts={setPosts} />
     </div>
   )
 }
