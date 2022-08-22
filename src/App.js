@@ -5,8 +5,9 @@ import Newsfeed from './components/pages/Newsfeed';
 import SearchResults from './components/pages/SearchResults';
 import axios from 'axios';
 import { Actions, UserContext } from './store/UserContext';
-import RegisterLogin from './components/pages/RegisterLogin';
+import LoginPage from './components/pages/LoginPage';
 import ProfilePage from './components/pages/ProfilePage';
+import RegisterPage from './components/pages/RegisterPage';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
@@ -37,9 +38,10 @@ function App() {
           exact path="/"
           element={
             typeof state.userId !== 'undefined' 
-            && (state.userId ? <Newsfeed /> : <RegisterLogin />)
+            && (state.userId ? <Newsfeed /> : <LoginPage />)
           }
         />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/searchResults" element={<SearchResults />} />
         <Route path="/profile/:userId" element={<ProfilePage />} />
       </Routes>

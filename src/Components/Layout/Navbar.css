@@ -19,6 +19,14 @@
   color: #fff;
 }
 
+.navbar-header.login {
+  background-color: #fff;
+}
+.navbar-header.login h1 {
+  color: #efd4fc;
+}
+
+
 @media only screen and (min-width: 992px) {
   .navbar {
     position: sticky;

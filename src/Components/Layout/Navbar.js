@@ -21,11 +21,11 @@ function Navbar() {
 
   return (
     <div className={scrollPosition === 0 ? "navbar" : "navbar shadow" }>
-        <div className="navbar-header">
+        <div className={state.userId ? "navbar-header" : "navbar-header login"}>
           <Link to="/"><h1>Social Feed</h1></Link>
           {state.userId && <UserOptions />}
         </div>
-        <Search />
+        {state.userId && <Search />}
     </div>
   )
 }
