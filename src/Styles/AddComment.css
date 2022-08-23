@@ -1,13 +1,21 @@
 .add-comment {
   display: flex;
-  padding: 10px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #ccc;
   align-items: center;
   margin-bottom: 5px;
 }
-
-.add-comment textarea {
+.comment-textarea {
   width: 100%;
+  padding: 8px 12px;
+  margin-right: 5px;
+  background-color: #f0f0f0;
+  border-radius: 1em;
+}
+
+.comment-textarea textarea {
+  width: 100%;
+  background-color: inherit;
   min-height: 16px;
   max-height: 500px;
   font: 14px sans-serif;
@@ -19,6 +27,7 @@
 
 .reply{
   align-self: flex-end;
+  padding: 8px 0;
 }
 
 .reply button {

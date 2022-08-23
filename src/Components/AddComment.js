@@ -30,15 +30,17 @@ function AddComment({ textRef, postId, getRecent }) {
 
   return (
     <div className="add-comment">
-      <TextForm 
-        textRef = {textRef}
-        rows="1"
-        placeholder = "Add your comment..."
-        submitText = {addComment}
-        textContent = {textContent}
-        setTextContent = {setTextContent}
-        minHeight = {16}
-      />
+      <div className="comment-textarea">
+        <TextForm 
+          textRef = {textRef}
+          rows="1"
+          placeholder = "Add your comment..."
+          submitText = {addComment}
+          textContent = {textContent}
+          setTextContent = {setTextContent}
+          minHeight = {16}
+        />
+      </div>
       <div className="reply">
         <button disabled={(textContent.length === 0)} onClick={addComment}>Comment</button>
       </div>
