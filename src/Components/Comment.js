@@ -6,6 +6,7 @@ import '../styles/Comment.css';
 import Editable from './Editable';
 import OptionsMenu from './OptionsMenu';
 import { UserContext } from '../store/UserContext';
+import { Link } from 'react-router-dom';
 
 function Comment( { details, removeComment, getRecent } ) {
   const { state } = useContext(UserContext);
@@ -62,7 +63,7 @@ function Comment( { details, removeComment, getRecent } ) {
         {commentEditable ? 
           <Editable originalText={details.commentText} saveEdit={editComment} editRef={editRef} /> :
           <div className="non-editable">
-            <div className="commenter">{details.commenter}</div>
+            <Link to={`/profile/${details.commenterId}`} className="commenter">{details.commenter}</Link>
             <div className="comment-text">{details.commentText}</div>
             {details.commentLikes!==0 &&
             <div className="comment-likes">

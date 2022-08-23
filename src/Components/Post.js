@@ -5,6 +5,7 @@ import PostInteraction from './PostInteraction';
 import OptionsMenu from './OptionsMenu';
 import Editable from './Editable';
 import { UserContext } from '../store/UserContext';
+import { Link } from 'react-router-dom';
 
 function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, updatePost, removePost }) {
   const { state } = useContext(UserContext);
@@ -38,7 +39,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
     <div className="post">
       <div className="post-header">
         <div>
-          <div className="username">{username}</div>
+          <Link to={`/profile/${userId}`} className="username">{username}</Link>
           <div className="post-time">{timestamp}</div>
         </div>
         {userId === state.userId 

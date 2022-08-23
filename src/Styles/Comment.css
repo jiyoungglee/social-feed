@@ -35,6 +35,12 @@
 .commenter {
   font: bold 14px sans-serif;
   line-height: 1.5;
+  color:black;
+  text-decoration: none;
+}
+
+.commenter:hover {
+  text-decoration: underline;
 }
 
 .comment-text {
