@@ -10,19 +10,22 @@ function ProfilePage() {
   const [posts, setPosts] = useState([]);
   const { userId } = useParams();
 
-  async function getUserPosts(url) {
-    const response = await axios.get(url);
+  async function getUserPosts(body) {
+    const response = await axios.get('/posts/getUserPosts', { params: body });
     setPosts(response.data);
   }
 
   useEffect(() => {
-    const endpoint = `/posts/getPosts/${userId}`;
-    getUserPosts(endpoint);
-  },[userId]);
+    const params = {
+      userId,
+      requestor: state.userId
+    };
+    getUserPosts(params);
+  },[userId, state.userId]);
 
   return (
     <div>
-      { state.userId === Number(userId) && <CreatePost getPosts={() => getUserPosts(`/posts/getPosts/${userId}`)} /> }
+      { state.userId === Number(userId) && <CreatePost getPosts={() => getUserPosts({userId, requestor: state.userId})} /> }
       <PostsLoad posts={posts} setPosts={setPosts} /> 
     </div>
   )

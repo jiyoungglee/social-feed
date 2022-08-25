@@ -1,25 +1,27 @@
 import PostsLoad from "../PostsLoad";
 import axios from "axios";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom'
+import { UserContext } from "../../store/UserContext";
 
 function SearchResults() {
+  const { state } = useContext(UserContext);
   const [posts, setPosts] = useState([]);
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("searchQuery");
   
-
   async function fetchResults(query) {
-    const response = await axios.put('/posts/getResults', {
-      searchQuery: query
-    })
+    const response = await axios.put('/posts/getResults', query)
     setPosts(response.data);
   }
 
   useEffect(() => {
-    const queryBody = `%${searchQuery}%`
+    const queryBody = {
+      searchQuery: `%${searchQuery}%`,
+      userId: state.userId
+    }
     fetchResults(queryBody);
-  }, [searchQuery]);
+  }, [searchQuery, state.userId]);
 
   return (
     <div>

@@ -1,12 +1,14 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-regular-svg-icons';
 import '../styles/PostInteraction.css';
 import AddComment from './AddComment';
 import Comment from './Comment';
+import { UserContext } from '../store/UserContext';
 
-function PostInteraction({ postId, postLikes, topComment, commentsCount, updatePost }) {
+function PostInteraction({ postId, postLikes, topComment, commentsCount, updatePost, liked }) {
+  const { state } = useContext(UserContext);
   const textRef = useRef(null);
   const [comments, setComments] = useState(topComment ? [topComment] : [])
   const [numberComments, setnumberComments] = useState(commentsCount ? commentsCount : 0)
@@ -27,7 +29,16 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
   // Like Button
   async function likePost() {
     try {
-      await axios.put('/posts/updatelikes', {id: postId, postLikes: postLikes+1});
+      await axios.post('/posts/likePost', {postId, userId: state.userId});
+      updatePost(postId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function unlikePost() {
+    try {
+      await axios.delete('/posts/unlikePost', { data: {postId, userId: state.userId} });
       updatePost(postId);
     } catch (error) {
       console.error(error);
@@ -64,7 +75,9 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
         <div className="number-comments">{numberComments} Comments</div>
       </div>
       <div className="post-feedback">
-        <button onClick={likePost}><FontAwesomeIcon icon={faHeart} /> Like</button>
+        { liked === 0
+        ? <button onClick={likePost}><FontAwesomeIcon icon={faHeart} /> Like</button>
+        : <button onClick={unlikePost}><FontAwesomeIcon icon={faHeart} /> Unlike</button> }
         <button onClick={toComment}><FontAwesomeIcon icon={faMessage} /> Comment</button>
       </div>
         <AddComment textRef={textRef} postId={postId} getRecent={getRecent} />

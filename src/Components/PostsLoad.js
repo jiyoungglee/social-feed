@@ -1,14 +1,17 @@
 import Post from "./Post";
 import axios from "axios";
+import { useContext } from "react";
+import { UserContext } from "../store/UserContext";
 
 function PostsLoad({ posts, setPosts }) {
+  const { state } = useContext(UserContext);
 
-  async function updatePost(id) {
-    const response = await axios.get(`/posts/getPost/${id}`);
+  async function updatePost(postId) {
+    const response = await axios.get(`/posts/getPost`,{params: {userId:state.userId, postId}});
     const updatedPost = response.data[0];
 
     const updatedPosts = posts.map((post) => {
-      if (post.id === id) {
+      if (post.id === postId) {
         return {
           ...post,
           ...updatedPost};
@@ -25,7 +28,7 @@ function PostsLoad({ posts, setPosts }) {
 
   return (
     <div>
-      {posts.map(({ poster, posterId, id, postDetails, postLikes, timestamp, commentId, commentText, commentLikes, commentTimestamp, commenter, commenterId, commentsCount }) => {
+      {posts.map(({ poster, posterId, id, postDetails, postLikes, timestamp, commentId, commentText, commentLikes, commentTimestamp, commenter, commenterId, commentsCount, liked}) => {
         return (
           <Post 
             key={id}
@@ -37,6 +40,7 @@ function PostsLoad({ posts, setPosts }) {
             postLikes={postLikes}
             topComment={commentId!==null && {commenterId, commentId, commentText, commentLikes, commentTimestamp, commenter}}
             commentsCount={commentsCount}
+            liked={liked}
             updatePost={updatePost}
             removePost={removePost}
           />)
