@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import {useNavigate, createSearchParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import {useNavigate, createSearchParams, useSearchParams } from 'react-router-dom';
 import '../styles/Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,13 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 function Search() {
   const [textContent, setTextContent] = useState('');
   let navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const searchQuery = searchParams.get("searchQuery");
+
+  useEffect(() => {
+    if(searchQuery) {setTextContent(searchQuery)}
+    else {setTextContent('')}
+  }, [searchQuery]);
 
   function searchFor() {
     navigate({
