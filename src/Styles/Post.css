@@ -19,11 +19,6 @@
   text-decoration: underline;
 }
 
-.post-time {
-  color: #9c9c9c;
-  font-size: 12px;
-}
-
 .post-content {
   padding: 20px 0;
   white-space: pre-wrap;

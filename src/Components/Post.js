@@ -6,6 +6,7 @@ import OptionsMenu from './OptionsMenu';
 import Editable from './Editable';
 import { UserContext } from '../store/UserContext';
 import { Link } from 'react-router-dom';
+import Timestamp from './Timestamp';
 
 function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, liked, updatePost, removePost }) {
   const { state } = useContext(UserContext);
@@ -40,7 +41,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
       <div className="post-header">
         <div>
           <Link to={`/profile/${userId}`} className="username">{username}</Link>
-          <div className="post-time">{timestamp}</div>
+          <Timestamp type="post" timestamp={timestamp} />
         </div>
         {userId === state.userId 
           && <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />}

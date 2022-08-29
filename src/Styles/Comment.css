@@ -5,7 +5,7 @@
 .comment-top {
   display: flex;
   align-items: center;
-  padding-bottom: 8px;
+  padding-bottom: 4px;
 }
 
 .comment-details {
@@ -52,7 +52,7 @@
 .comment-likes {
   position: absolute;
   right: -10px;
-  bottom: -7px;
+  bottom: -5px;
   background-color: #fff;
   border-radius: 10em;
   box-shadow: .5px .5px 2px #db93fc;
@@ -70,6 +70,7 @@
 
 .comment-bottom {
   display: flex;
+  padding-left: 12px;
 }
 
 .comment-bottom button {
@@ -79,9 +80,4 @@
   font: bold 12px sans-serif;
   cursor: pointer;
   padding-left: 0;
-}
-
-.comment-time {
-  color: #9c9c9c;
-  font-size: 12px;
 }

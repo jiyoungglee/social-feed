@@ -7,26 +7,26 @@ import Editable from './Editable';
 import OptionsMenu from './OptionsMenu';
 import { UserContext } from '../store/UserContext';
 import { Link } from 'react-router-dom';
+import Timestamp from './Timestamp';
 
 function Comment( { details, removeComment, getRecent } ) {
   const { state } = useContext(UserContext);
   const [commentEditable, setCommentEditable] = useState(false);
   const editRef = useRef(null);
 
-
   function enableEdit() {
     setCommentEditable(true);
   }
 
-  function getTime(timestamp) {
-    const today = new Date().toISOString().substring(0,10);
-    if (timestamp.startsWith(today)) {
-      return `Today at ${timestamp.substring(11,16)}`
-    }
-    else {
-      return timestamp.substring(0,10);
-    }
-  }
+  // function getTime(timestamp) {
+  //   const today = new Date().toISOString().substring(0,10);
+  //   if (timestamp.startsWith(today)) {
+  //     return `Today at ${timestamp.substring(11,16)}`
+  //   }
+  //   else {
+  //     return timestamp.substring(0,10);
+  //   }
+  // }
 
   async function likeComment() {
     try {
@@ -83,7 +83,7 @@ function Comment( { details, removeComment, getRecent } ) {
         </div> :
         <div className="comment-bottom">
           <button onClick={likeComment}>Like</button>
-          <div className="comment-time">{getTime(details.commentTimestamp)}</div>
+          <Timestamp type="comment" timestamp={details.commentTimestamp}/>
         </div>
       }
     </div>
