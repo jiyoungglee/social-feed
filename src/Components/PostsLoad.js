@@ -22,7 +22,7 @@ function PostsLoad({ posts, setPosts }) {
     setPosts(updatedPosts);
   }
 
-  async function removePost(id) {
+  function removePost(id) {
     setPosts(posts.filter(post => post.id!== id));
   }
 

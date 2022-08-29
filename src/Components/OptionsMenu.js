@@ -4,7 +4,7 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import '../styles/OptionsMenu.css';
 import PopupAlert from './PopupAlert';
 
-function OptionsMenu({ onDelete, enableEdit }) {
+function OptionsMenu({ onDelete, enableEdit, onHide, editMode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [confirmRequired, setConfirmRequired] = useState(false);
   const menuRef = useRef(null);
@@ -37,14 +37,21 @@ function OptionsMenu({ onDelete, enableEdit }) {
     toggleMenu();
   }
 
-
   function renderMenu() {
-    return (
-      <div className="menu">
-        <button onClick={confirmDelete}>Delete</button>
-        <button onClick={onEdit}>Edit</button>
-      </div>
-    )
+    if(editMode) {
+      return (
+        <div className="menu">
+          <button onClick={confirmDelete}>Delete</button>
+          <button onClick={onEdit}>Edit</button>
+        </div>
+      )
+    } else {
+      return (
+        <div className="menu">
+          <button onClick={onHide}>Hide</button>
+        </div>
+      )
+    }
   }
 
   return (

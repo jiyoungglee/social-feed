@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { UserContext, Actions } from '../store/UserContext';
-import '../styles/UserOptions.css';
+import '../styles/UserMenu.css';
 
-function UserOptions() {
+function UserMenu() {
   const { state, dispatch } = useContext(UserContext);
   const [optionsOpen, setOptionsOpen] = useState(false);
   const optionsRef = useRef(null);
@@ -44,7 +44,7 @@ function UserOptions() {
 
   function renderOptions() {
     return (
-      <div className="user-menu">
+      <div className="dropdown-menu">
         <Link to={`/profile/${state.userId}`} onClick={toggleOptions}>My Profile</Link>
         <button onClick={logout}>Log Out</button>
       </div>
@@ -52,7 +52,7 @@ function UserOptions() {
   }
 
   return (
-    <div className="user-options" ref={optionsRef}>
+    <div className="user-menu" ref={optionsRef}>
       <div onClick={toggleOptions}>
         <FontAwesomeIcon icon={faUser} className="profile-icon" />
       </div>
@@ -61,4 +61,4 @@ function UserOptions() {
   )
 }
 
-export default UserOptions;
+export default UserMenu;

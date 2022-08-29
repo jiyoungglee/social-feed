@@ -1,4 +1,4 @@
-.user-options {
+.user-menu {
   position: absolute;
   right: 0;
   top: 0;
@@ -11,7 +11,7 @@
   color: #fff;
 }
 
-.user-menu {
+.dropdown-menu {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -23,7 +23,7 @@
   z-index: 2;
 }
 
-.user-menu > * {
+.dropdown-menu > * {
   background: #fff;
   border: none;
   text-align: left;
@@ -33,7 +33,7 @@
   color: black;
 }
 
-.user-menu > *:hover {
+.dropdown-menu > *:hover {
   font-weight: bold;
 }
 

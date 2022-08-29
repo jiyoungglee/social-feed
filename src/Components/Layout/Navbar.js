@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { UserContext } from '../../store/UserContext';
 import Search from '../Search';
-import UserOptions from '../UserOptions';
+import UserMenu from '../UserMenu';
 import './Navbar.css';
 
 
@@ -23,7 +23,7 @@ function Navbar() {
     <div className={scrollPosition === 0 ? "navbar" : "navbar shadow" }>
         <div className={state.userId ? "navbar-header" : "navbar-header login"}>
           <Link to="/"><h1>Social Feed</h1></Link>
-          {state.userId && <UserOptions />}
+          {state.userId && <UserMenu />}
         </div>
         {state.userId && <Search />}
     </div>

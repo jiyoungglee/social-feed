@@ -43,8 +43,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
           <Link to={`/profile/${userId}`} className="username">{username}</Link>
           <Timestamp type="post" timestamp={timestamp} />
         </div>
-        {userId === state.userId 
-          && <OptionsMenu onDelete={deletePost} enableEdit={enableEdit} />}
+        <OptionsMenu onHide={() => removePost(postId)} onDelete={deletePost} enableEdit={enableEdit} editMode={userId === state.userId} />
       </div>
       <div className="post-content">
         {postEditable 

@@ -74,7 +74,7 @@ function Comment( { details, removeComment, getRecent } ) {
           </div>
         }
         </div>
-        {details.commenterId === state.userId && <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} />}
+        <OptionsMenu onDelete={deleteComment} enableEdit={enableEdit} editMode={details.commenterId === state.userId} />
       </div>
       {commentEditable ?
         <div className="edit-comment">
