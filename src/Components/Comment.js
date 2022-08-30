@@ -18,19 +18,18 @@ function Comment( { details, removeComment, getRecent } ) {
     setCommentEditable(true);
   }
 
-  // function getTime(timestamp) {
-  //   const today = new Date().toISOString().substring(0,10);
-  //   if (timestamp.startsWith(today)) {
-  //     return `Today at ${timestamp.substring(11,16)}`
-  //   }
-  //   else {
-  //     return timestamp.substring(0,10);
-  //   }
-  // }
-
   async function likeComment() {
     try {
-      await axios.put('/comments/updatelikes', {commentId: details.commentId, commentLikes: details.commentLikes+1});
+      await axios.post('/comments/likeComment', {commentId: details.commentId, userId: state.userId});
+      getRecent(details.commentId);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function unlikeComment() {
+    try {
+      await axios.delete('/comments/unlikeComment', { data: {commentId: details.commentId, userId: state.userId} });
       getRecent(details.commentId);
     } catch (error) {
       console.error(error);
@@ -82,7 +81,9 @@ function Comment( { details, removeComment, getRecent } ) {
           <span onClick={() => setCommentEditable(false)}>Cancel</span>
         </div> :
         <div className="comment-bottom">
-          <button onClick={likeComment}>Like</button>
+          { details.commentLiked === 0
+          ? <button onClick={likeComment}> Like</button>
+          : <button onClick={unlikeComment}> Unlike</button> }
           <Timestamp type="comment" timestamp={details.commentTimestamp}/>
         </div>
       }

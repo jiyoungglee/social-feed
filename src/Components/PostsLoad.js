@@ -28,7 +28,7 @@ function PostsLoad({ posts, setPosts }) {
 
   return (
     <div>
-      {posts.map(({ poster, posterId, id, postDetails, postLikes, timestamp, commentId, commentText, commentLikes, commentTimestamp, commenter, commenterId, commentsCount, liked}) => {
+      {posts.map(({ poster, posterId, id, postDetails, postLikes, timestamp, commentId, commentText, commentLikes, commentTimestamp, commenter, commenterId, commentsCount, postLiked, commentLiked}) => {
         return (
           <Post 
             key={id}
@@ -38,9 +38,9 @@ function PostsLoad({ posts, setPosts }) {
             username={poster}
             details={postDetails}
             postLikes={postLikes}
-            topComment={commentId!==null && {commenterId, commentId, commentText, commentLikes, commentTimestamp, commenter}}
+            topComment={commentId!==null && {commenterId, commentId, commentText, commentLikes, commentTimestamp, commenter, commentLiked}}
             commentsCount={commentsCount}
-            liked={liked}
+            postLiked={postLiked}
             updatePost={updatePost}
             removePost={removePost}
           />)

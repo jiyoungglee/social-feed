@@ -42,8 +42,8 @@ function App() {
           }
         />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/searchResults" element={<SearchResults />} />
-        <Route path="/profile/:userId" element={<ProfilePage />} />
+        <Route path="/searchResults" element={typeof state.userId !== 'undefined' && <SearchResults />} />
+        <Route path="/profile/:userId" element={typeof state.userId !== 'undefined' && <ProfilePage />} />
       </Routes>
     </Layout>
   );

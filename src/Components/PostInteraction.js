@@ -7,14 +7,14 @@ import AddComment from './AddComment';
 import Comment from './Comment';
 import { UserContext } from '../store/UserContext';
 
-function PostInteraction({ postId, postLikes, topComment, commentsCount, updatePost, liked }) {
+function PostInteraction({ postId, postLikes, topComment, commentsCount, updatePost, postLiked }) {
   const { state } = useContext(UserContext);
   const textRef = useRef(null);
   const [comments, setComments] = useState(topComment ? [topComment] : [])
   const [numberComments, setnumberComments] = useState(commentsCount ? commentsCount : 0)
 
   async function fetchComments() {
-    const response = await axios.get(`/comments/getComments/${postId}`);
+    const response = await axios.get(`/comments/getComments`, {params: {userId:state.userId, postId}});
     setComments(response.data)
   }
 
@@ -51,7 +51,7 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
   }
 
   async function getRecent(id) {
-    const response = await axios.get(`/comments/getComment/${id}`);
+    const response = await axios.get(`/comments/getComment`, {params: {userId:state.userId, commentId:id}});
     const recentComment = response.data[0];
     const commentIndex = comments.findIndex(comment => comment.commentId===id)
     if(commentIndex === -1) {
@@ -75,7 +75,7 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
         <div className="number-comments">{numberComments} Comments</div>
       </div>
       <div className="post-feedback">
-        { liked === 0
+        { postLiked === 0
         ? <button onClick={likePost}><FontAwesomeIcon icon={faHeart} /> Like</button>
         : <button onClick={unlikePost}><FontAwesomeIcon icon={faHeart} /> Unlike</button> }
         <button onClick={toComment}><FontAwesomeIcon icon={faMessage} /> Comment</button>

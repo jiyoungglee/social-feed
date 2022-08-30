@@ -8,7 +8,7 @@ import { UserContext } from '../store/UserContext';
 import { Link } from 'react-router-dom';
 import Timestamp from './Timestamp';
 
-function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, liked, updatePost, removePost }) {
+function Post({ postId, timestamp, userId, username, details, postLikes, topComment, commentsCount, postLiked, updatePost, removePost }) {
   const { state } = useContext(UserContext);
   const [postEditable, setPostEditable] = useState(false);
   const editRef = useRef(null);
@@ -54,7 +54,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
             </div>
           : <div className="view-post">{details}</div>}
       </div>
-      <PostInteraction postId={postId} postLikes={postLikes} updatePost={updatePost} topComment={topComment} commentsCount={commentsCount} liked={liked} />
+      <PostInteraction postId={postId} postLikes={postLikes} updatePost={updatePost} topComment={topComment} commentsCount={commentsCount} postLiked={postLiked} />
     </div>
   )
 };
