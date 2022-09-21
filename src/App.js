@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Layout from './components/layout/Layout';
-import Newsfeed from './components/pages/Newsfeed';
-import SearchResults from './components/pages/SearchResults';
+import Layout from './Components/Layout/Layout';
+import Newsfeed from './Components/pages/Newsfeed';
+import SearchResults from './Components/pages/SearchResults';
 import axios from 'axios';
 import { Actions, UserContext } from './store/UserContext';
-import LoginPage from './components/pages/LoginPage';
-import ProfilePage from './components/pages/ProfilePage';
-import RegisterPage from './components/pages/RegisterPage';
+import LoginPage from './Components/pages/LoginPage';
+import ProfilePage from './Components/pages/ProfilePage';
+import RegisterPage from './Components/pages/RegisterPage';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
