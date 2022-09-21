@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import http from '../../http-common';
 import PostsLoad from "../PostsLoad";
 import { useParams } from "react-router-dom";
 import CreatePost from "../CreatePost";
@@ -11,7 +11,7 @@ function ProfilePage() {
   const { userId } = useParams();
 
   async function getUserPosts(body) {
-    const response = await axios.get('/posts/getUserPosts', { params: body });
+    const response = await http.get('/posts/getUserPosts', { params: body });
     setPosts(response.data);
   }
 

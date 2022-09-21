@@ -1,4 +1,4 @@
-import axios from "axios";
+import http from '../../http-common';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -34,8 +34,8 @@ function RegisterPage() {
       username: userData.name
     }
     try {
-      await axios.post('/users/register', body);
-      const response = await axios.post('/users/login', body);
+      await http.post('/users/register', body);
+      const response = await http.post('/users/login', body);
       dispatch({
         type: Actions.UPDATE,
         payload: {

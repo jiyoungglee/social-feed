@@ -1,5 +1,5 @@
 import Post from "./Post";
-import axios from "axios";
+import http from '../http-common';
 import { useContext } from "react";
 import { UserContext } from "../store/UserContext";
 
@@ -7,7 +7,7 @@ function PostsLoad({ posts, setPosts }) {
   const { state } = useContext(UserContext);
 
   async function updatePost(postId) {
-    const response = await axios.get(`/posts/getPost`,{params: {userId:state.userId, postId}});
+    const response = await http.get(`/posts/getPost`,{params: {userId:state.userId, postId}});
     const updatedPost = response.data[0];
 
     const updatedPosts = posts.map((post) => {

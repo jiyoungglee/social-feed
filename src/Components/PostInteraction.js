@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-import axios from 'axios';
+import http from '../http-common';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-regular-svg-icons';
 import '../Styles/PostInteraction.css';
@@ -14,7 +14,7 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
   const [numberComments, setnumberComments] = useState(commentsCount ? commentsCount : 0)
 
   async function fetchComments() {
-    const response = await axios.get(`/comments/getComments`, {params: {userId:state.userId, postId}});
+    const response = await http.get(`/comments/getComments`, {params: {userId:state.userId, postId}});
     setComments(response.data)
   }
 
@@ -29,7 +29,7 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
   // Like Button
   async function likePost() {
     try {
-      await axios.post('/posts/likePost', {postId, userId: state.userId});
+      await http.post('/posts/likePost', {postId, userId: state.userId});
       updatePost(postId);
     } catch (error) {
       console.error(error);
@@ -38,7 +38,7 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
 
   async function unlikePost() {
     try {
-      await axios.delete('/posts/unlikePost', { data: {postId, userId: state.userId} });
+      await http.delete('/posts/unlikePost', { data: {postId, userId: state.userId} });
       updatePost(postId);
     } catch (error) {
       console.error(error);
@@ -51,7 +51,7 @@ function PostInteraction({ postId, postLikes, topComment, commentsCount, updateP
   }
 
   async function getRecent(id) {
-    const response = await axios.get(`/comments/getComment`, {params: {userId:state.userId, commentId:id}});
+    const response = await http.get(`/comments/getComment`, {params: {userId:state.userId, commentId:id}});
     const recentComment = response.data[0];
     const commentIndex = comments.findIndex(comment => comment.commentId===id)
     if(commentIndex === -1) {

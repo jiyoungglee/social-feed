@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-import axios from 'axios';
+import http from '../http-common';
 import '../Styles/Post.css'
 import PostInteraction from './PostInteraction';
 import OptionsMenu from './OptionsMenu';
@@ -15,7 +15,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
 
   async function deletePost() {
     try {
-      await axios.delete('/posts/deletepost', { data: {userId: state.userId, id: postId} });
+      await http.delete('/posts/deletepost', { data: {userId: state.userId, id: postId} });
       removePost(postId);
     } catch (error) {
       console.error(error);
@@ -28,7 +28,7 @@ function Post({ postId, timestamp, userId, username, details, postLikes, topComm
 
   async function editPost(newText) {
     try {
-      await axios.put('/posts/updatepost', {userId: state.userId, id: postId, postDetails: newText});
+      await http.put('/posts/updatepost', {userId: state.userId, id: postId, postDetails: newText});
     } catch (error) {
       console.error(error);
     }

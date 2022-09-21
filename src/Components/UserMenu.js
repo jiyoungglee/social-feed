@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
+import http from '../http-common';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -34,7 +34,7 @@ function UserMenu() {
 
   async function logout() {
     if(state.userId) {
-      await axios.post('/users/logout');
+      await http.post('/users/logout');
     }
     dispatch({
       type: Actions.RESET

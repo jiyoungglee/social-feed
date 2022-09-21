@@ -1,5 +1,5 @@
+import http from '../http-common';
 import { useContext, useState } from 'react';
-import axios from 'axios';
 import '../Styles/AddComment.css';
 import TextForm from './TextForm';
 import { UserContext } from '../store/UserContext';
@@ -16,7 +16,7 @@ function AddComment({ textRef, postId, getRecent }) {
 
   async function addComment() {
       try {
-        const response = await axios.post('/comments/insert', {
+        const response = await http.post('/comments/insert', {
           userId: state.userId,
           postId: postId,
           commentText: textContent,

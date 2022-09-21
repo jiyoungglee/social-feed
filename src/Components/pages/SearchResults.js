@@ -1,5 +1,5 @@
 import PostsLoad from "../PostsLoad";
-import axios from "axios";
+import http from '../../http-common';
 import { useState, useEffect, useContext } from 'react';
 import { useSearchParams } from 'react-router-dom'
 import { UserContext } from "../../store/UserContext";
@@ -11,7 +11,7 @@ function SearchResults() {
   const searchQuery = searchParams.get("searchQuery");
   
   async function fetchResults(query) {
-    const response = await axios.put('/posts/getResults', query)
+    const response = await http.put('/posts/getResults', query)
     setPosts(response.data);
   }
 

@@ -1,5 +1,5 @@
 import { useState, useRef, useContext } from 'react';
-import axios from 'axios';
+import http from '../http-common';
 import '../Styles/CreatePost.css';
 import TextForm from './TextForm';
 import { UserContext } from '../store/UserContext';
@@ -20,7 +20,7 @@ function CreatePost({ getPosts }) {
   // Main submission function
   async function uploadPost() {
     try {
-      await axios.post('/posts/insert', {
+      await http.post('/posts/insert', {
         userId: state.userId,
         postDetails: textContent,
       });

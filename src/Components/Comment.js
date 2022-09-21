@@ -1,5 +1,5 @@
+import http from '../http-common';
 import { useState, useRef, useContext } from 'react';
-import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import '../Styles/Comment.css';
@@ -20,7 +20,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function likeComment() {
     try {
-      await axios.post('/comments/likeComment', {commentId: details.commentId, userId: state.userId});
+      await http.post('/comments/likeComment', {commentId: details.commentId, userId: state.userId});
       getRecent(details.commentId);
     } catch (error) {
       console.error(error);
@@ -29,7 +29,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function unlikeComment() {
     try {
-      await axios.delete('/comments/unlikeComment', { data: {commentId: details.commentId, userId: state.userId} });
+      await http.delete('/comments/unlikeComment', { data: {commentId: details.commentId, userId: state.userId} });
       getRecent(details.commentId);
     } catch (error) {
       console.error(error);
@@ -38,7 +38,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function deleteComment() {
     try {
-      await axios.delete('/comments/deletecomment', { data: {userId: state.userId, commentId: details.commentId} });
+      await http.delete('/comments/deletecomment', { data: {userId: state.userId, commentId: details.commentId} });
       removeComment(details.commentId);
     } catch (error) {
       console.error(error);
@@ -47,7 +47,7 @@ function Comment( { details, removeComment, getRecent } ) {
 
   async function editComment(newText) {
     try {
-      await axios.put('/comments/updatecomment', {userId: state.userId, commentId: details.commentId, commentText: newText});
+      await http.put('/comments/updatecomment', {userId: state.userId, commentId: details.commentId, commentText: newText});
     } catch (error) {
       console.error(error);
     }

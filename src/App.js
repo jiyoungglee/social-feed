@@ -1,9 +1,9 @@
+import http from "./http-common";
 import { useContext, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout/Layout';
 import Newsfeed from './Components/pages/Newsfeed';
 import SearchResults from './Components/pages/SearchResults';
-import axios from 'axios';
 import { Actions, UserContext } from './store/UserContext';
 import LoginPage from './Components/pages/LoginPage';
 import ProfilePage from './Components/pages/ProfilePage';
@@ -15,7 +15,7 @@ function App() {
   useEffect(() => {
     async function getCurrentUser() {
     try {
-      const response = await axios.get('/users/currentUser');
+      const response = await http.get('/users/currentUser');
       dispatch({
         type: Actions.UPDATE,
         payload: {

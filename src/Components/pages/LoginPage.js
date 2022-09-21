@@ -1,4 +1,4 @@
-import axios from "axios";
+import http from '../../http-common';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -27,7 +27,7 @@ function LoginPage() {
 
   async function login(userData) {
     try {
-      const response = await axios.post('/users/login', {
+      const response = await http.post('/users/login', {
         email: userData.email,
         pw: userData.password
       });
