@@ -1,4 +1,4 @@
-import '../styles/Timestamp.css';
+import '../Styles/Timestamp.css';
 
 function Timestamp(props) {
   const postTimestamp = new Date(props.timestamp);

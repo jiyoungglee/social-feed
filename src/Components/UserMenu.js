@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import { UserContext, Actions } from '../store/UserContext';
-import '../styles/UserMenu.css';
+import '../Styles/UserMenu.css';
 
 function UserMenu() {
   const { state, dispatch } = useContext(UserContext);

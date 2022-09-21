@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
-import '../styles/CreatePost.css';
+import '../Styles/CreatePost.css';
 import TextForm from './TextForm';
 import { UserContext } from '../store/UserContext';
 

@@ -2,7 +2,7 @@ import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
-import '../styles/Comment.css';
+import '../Styles/Comment.css';
 import Editable from './Editable';
 import OptionsMenu from './OptionsMenu';
 import { UserContext } from '../store/UserContext';

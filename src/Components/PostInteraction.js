@@ -2,7 +2,7 @@ import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faMessage } from '@fortawesome/free-regular-svg-icons';
-import '../styles/PostInteraction.css';
+import '../Styles/PostInteraction.css';
 import AddComment from './AddComment';
 import Comment from './Comment';
 import { UserContext } from '../store/UserContext';

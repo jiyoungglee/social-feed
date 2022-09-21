@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import '../styles/OptionsMenu.css';
+import '../Styles/OptionsMenu.css';
 import PopupAlert from './PopupAlert';
 
 function OptionsMenu({ onDelete, enableEdit, onHide, editMode }) {

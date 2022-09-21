@@ -1,6 +1,6 @@
 import { useState, useRef, useContext } from 'react';
 import axios from 'axios';
-import '../styles/Post.css'
+import '../Styles/Post.css'
 import PostInteraction from './PostInteraction';
 import OptionsMenu from './OptionsMenu';
 import Editable from './Editable';

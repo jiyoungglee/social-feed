@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import {useNavigate, createSearchParams, useSearchParams } from 'react-router-dom';
-import '../styles/Search.css';
+import '../Styles/Search.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import axios from 'axios';
-import '../styles/AddComment.css';
+import '../Styles/AddComment.css';
 import TextForm from './TextForm';
 import { UserContext } from '../store/UserContext';
 
