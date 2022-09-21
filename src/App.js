@@ -35,7 +35,7 @@ function App() {
     <Layout>
       <Routes>
         <Route 
-          exact path="/"
+          path="/"
           element={
             typeof state.userId !== 'undefined' 
             && (state.userId ? <Newsfeed /> : <LoginPage />)
