@@ -1,6 +1,6 @@
 import http from "./http-common";
 import { useContext, useEffect } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import Layout from './Components/Layout/Layout';
 import Newsfeed from './Components/pages/Newsfeed';
 import SearchResults from './Components/pages/SearchResults';
@@ -11,6 +11,7 @@ import RegisterPage from './Components/pages/RegisterPage';
 
 function App() {
   const { state, dispatch } = useContext(UserContext);
+  const location = useLocation();
 
   useEffect(() => {
     async function getCurrentUser() {
@@ -29,7 +30,7 @@ function App() {
     }}
     getCurrentUser();
 
-  },[dispatch])
+  },[dispatch, location.pathname]);
 
   return (
     <Layout>
